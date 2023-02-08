@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="images">
+    <file>pid.png</file>
+  </qresource>
+</RCC>
