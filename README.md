@@ -1,2 +1,1 @@
-# mission_control
-MACH's Mission Control Repository
+# MACH's Mission Control Repository
