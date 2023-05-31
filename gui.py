@@ -92,7 +92,7 @@ class Ui_MainWindow(object):
         self.V11_S_NO_open.setFont(font)
         self.V11_S_NO_open.setObjectName("V11_S_NO_open")
         self.V11_S_NO_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }" "QPushButton:pressed { background-color: #074d05; }")
-        self.V11_S_NO_open.clicked.connect(lambda: self.open_valve(b"V11_S_NO_open\n"))
+        self.V11_S_NO_open.clicked.connect(lambda: self.open_valve(b"V11_S_open\n"))
         self.V11_S_NO_close = QtWidgets.QPushButton(self.centralwidget)
         self.V11_S_NO_close.setGeometry(QtCore.QRect(220, 580, 71, 21))
         font = QtGui.QFont()
