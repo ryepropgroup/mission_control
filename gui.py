@@ -40,7 +40,7 @@ from PyQt5.QtCore import Qt, QRect, QBasicTimer, QPoint  # Import QPoint
 from PyQt5.QtGui import QPainter, QPen, QFont, QColor, QPolygon
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
+    def __init__(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1440, 872)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -51,7 +51,7 @@ class Ui_MainWindow(object):
         font.setFamily("Helvetica")
         self.p_and_id.setFont(font)
         self.p_and_id.setText("")
-        self.p_and_id.setPixmap(QtGui.QPixmap("Copy of PM P&ID (V5.0)-2.png"))
+        self.p_and_id.setPixmap(QtGui.QPixmap("pid.png"))
         self.p_and_id.setScaledContents(True)
         self.p_and_id.setObjectName("p_and_id")
 
@@ -66,7 +66,7 @@ class Ui_MainWindow(object):
         self.time_label.setGeometry(QtCore.QRect(330, 30, 151, 31))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
-        font.setPointSize(24)
+        font.setPointSize(10)
         self.time_label.setFont(font)
         self.time_label.setAlignment(QtCore.Qt.AlignCenter)
         self.time_label.setObjectName("time_label")
@@ -75,7 +75,7 @@ class Ui_MainWindow(object):
         self.date_label.setGeometry(QtCore.QRect(330, 70, 151, 31))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
-        font.setPointSize(18)
+        font.setPointSize(12)
         self.date_label.setFont(font)
         self.date_label.setAlignment(QtCore.Qt.AlignCenter)
         self.date_label.setObjectName("date_label")
@@ -402,10 +402,10 @@ class Ui_MainWindow(object):
                 p1_val = json_data['lj']['p1val']
                 p2_val = json_data['lj']['p2val']
                 p3_val = json_data['lj']['p3val']
-
-                self.P10.setValue(int(p1_val))
-                self.P20.setValue(int(p2_val))
-                self.P30.setValue(int(p3_val))
+                print(json_data)
+                #self.P21.setValue(int(p1_val))
+                self.P31.setValue(int(p2_val))
+                self.P21.setValue(int(p3_val))
                 valves = json_data['valves']
                 print("P1 Value:", p1_val)
                 print("P2 Value:", p2_val)
@@ -479,10 +479,10 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
+    ui = Ui_MainWindow(MainWindow)
     ui.connect()
     update_thread = threading.Thread(target=ui.update_valve_state, daemon=True)
     update_thread.start()
-    ui.setupUi(MainWindow)
+    #ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
