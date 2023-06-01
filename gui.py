@@ -446,18 +446,18 @@ class Ui_MainWindow(object):
                 self.P21.setValue(int(p3_val))
 
                 #set valve state
-                self.V10_SB_state.setText(bool(v10_sb))
-                self.V11_S_NO_state.setText(bool(v11_s))
-                self.V12_S_state.setText(bool(v12_s))
+                self.V10_SB_state.setTex(v10_sb)
+                self.V11_S_NO_state.setText(v11_s)
+                self.V12_S_state.setText(v12_s)
 
-                self.V20_SB_state.setText(bool(v20_sb))
-                self.V23_SB_state.setText(bool())
+                self.V20_SB_state.setText(v20_sb)
+                self.V23_SB_state.setText(v23_sb)
 
-                self.V30_SB_state.setText(bool())
-                self.V34_SB_state.setText(bool())
-                self.V35_S_state.setText(bool())
-                self.V36_SB_state.setText(bool())
-                self.V37_S_state.setText(bool())
+                self.V30_SB_state.setText(v30_sb)
+                self.V34_SB_state.setText(v34_sb)
+                self.V35_S_state.setText(v35_s)
+                self.V36_SB_state.setText(v36_sb)
+                self.V37_S_state.setText(v37_s)
 
                 valves = json_data['valves']
                 print("P1 Value:", p1_val)
