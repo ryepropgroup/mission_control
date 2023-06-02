@@ -28,7 +28,7 @@ import json
 
 
 import socket
-PORT = 6969
+PORT = 6970
 
 
 
@@ -385,7 +385,6 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
     def update_date_time(self): 
 
         #set the current date and time 
@@ -446,18 +445,18 @@ class Ui_MainWindow(object):
                 self.P21.setValue(int(p3_val))
 
                 #set valve state
-                self.V10_SB_state.setTex(v10_sb)
-                self.V11_S_NO_state.setText(v11_s)
-                self.V12_S_state.setText(v12_s)
+                self.V10_SB_state.setText(str(v10_sb))
+                self.V11_S_NO_state.setText(str(v11_s))
+                self.V12_S_state.setText(str(v12_s))
 
-                self.V20_SB_state.setText(v20_sb)
-                self.V23_SB_state.setText(v23_sb)
+                self.V20_SB_state.setText(str(v20_sb))
+                self.V23_SB_state.setText(str(v23_sb))
 
-                self.V30_SB_state.setText(v30_sb)
-                self.V34_SB_state.setText(v34_sb)
-                self.V35_S_state.setText(v35_s)
-                self.V36_SB_state.setText(v36_sb)
-                self.V37_S_state.setText(v37_s)
+                self.V30_SB_state.setText(str(v30_sb))
+                self.V34_SB_state.setText(str(v34_sb))
+                self.V35_S_state.setText(str(v35_s))
+                self.V36_SB_state.setText(str(v36_sb))
+                self.V37_S_state.setText(str(v37_s))
 
                 valves = json_data['valves']
                 print("P1 Value:", p1_val)
