@@ -553,10 +553,13 @@ class Ui_MainWindow(object):
             except json.JSONDecodeError:
                 pass
                 
-    
-
-            
-
+    def translateState(self, string):
+        if string == "false": 
+            field = "Closed"
+            return(field)
+        elif string == "true": 
+            field = "Open"
+            return(field)
 
 
     def connect(self): 
