@@ -509,7 +509,7 @@ class Ui_MainWindow(object):
         self.time_label.setText(current_date)
     
     def abort_button(self): 
-        s.send("stop")
+        s.send(b"stop")
         s.close()
     
     def open_all_valves(self): 
