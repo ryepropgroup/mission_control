@@ -29,7 +29,7 @@ import json
 
 
 import socket
-PORT = 6970
+PORT = 6969
 
 
 
@@ -568,10 +568,26 @@ class Ui_MainWindow(object):
                 print(json_data)
 
                 #self.P21.setValue(int(p1_val))
+                try:
+                    self.P31.setValue(int(p1_val))
+                except Exception:
+                    pass
 
-                self.P31.setValue(int(p1_val))
-                self.P21.setValue(int(p2_val))
-                self.P10.setValue(int(p3_val))
+                
+                try:
+                   self.P21.setValue(int(p2_val)) 
+                except Exception:
+                    pass
+
+                try:
+                    self.P10.setValue(int(p3_val))
+                except Exception:
+                    pass
+
+
+                
+                
+                
 
                 #set valve state
                 self.V10_SB_state.setText(self.translateState(str(v10_sb)))
