@@ -527,18 +527,18 @@ class Ui_MainWindow(object):
                 self.P21.setValue(int(p3_val))
 
                 #set valve state
-                self.V10_SB_state.setText(str(v10_sb))
-                self.V11_S_NO_state.setText(str(v11_s))
-                self.V12_S_state.setText(str(v12_s))
+                self.V10_SB_state.setText(self.translateState(str(v10_sb)))
+                self.V11_S_NO_state.setText(self.translateState(str(v11_s)))
+                self.V12_S_state.setText(self.translateState(str(v12_s)))
 
-                self.V20_SB_state.setText(str(v20_sb))
-                self.V23_SB_state.setText(str(v23_sb))
+                self.V20_SB_state.setText(self.translateState(str(v20_sb)))
+                self.V23_SB_state.setText(self.translateState(str(v23_sb)))
 
-                self.V30_SB_state.setText(str(v30_sb))
-                self.V34_SB_state.setText(str(v34_sb))
-                self.V35_S_state.setText(str(v35_s))
-                self.V36_SB_state.setText(str(v36_sb))
-                self.V37_S_state.setText(str(v37_s))
+                self.V30_SB_state.setText(self.translateState(str(v30_sb)))
+                self.V34_SB_state.setText(self.translateState(str(v34_sb)))
+                self.V35_S_state.setText(self.translateState(str(v35_s)))
+                self.V36_SB_state.setText(self.translateState(str(v36_sb)))
+                self.V37_S_state.setText(self.translateState(str(v37_s)))
 
 
                 #set thermocouples 
