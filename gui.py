@@ -66,7 +66,7 @@ class Ui_MainWindow(object):
         self.abort.setGeometry(QtCore.QRect(50, 260, 90, 55))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
-        font.setPointSize(22)
+        font.setPointSize(20)
         self.abort.setFont(font)
         self.abort.setObjectName("time_label")
         self.abort.setStyleSheet("QPushButton { background-color: red; color: white; }" "QPushButton:pressed { background-color: #4d0505; }")
@@ -74,20 +74,20 @@ class Ui_MainWindow(object):
         self.abort.clicked.connect(self.abort_button)
 
         self.open_all = QtWidgets.QPushButton(self.centralwidget)
-        self.open_all.setGeometry(QtCore.QRect(150, 260, 90, 55))
+        self.open_all.setGeometry(QtCore.QRect(300, 200, 90, 55))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
-        font.setPointSize(14)
+        font.setPointSize(10)
         self.open_all.setFont(font)
         self.open_all.setObjectName("time_label")
         self.open_all.setStyleSheet("QPushButton { background-color: #2ab7ca; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
         self.open_all.clicked.connect(self.open_all_valves)
 
         self.close_all = QtWidgets.QPushButton(self.centralwidget)
-        self.close_all.setGeometry(QtCore.QRect(250, 260, 90, 55))
+        self.close_all.setGeometry(QtCore.QRect(400, 200, 90, 55))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
-        font.setPointSize(12)
+        font.setPointSize(10)
         self.close_all.setFont(font)
         self.close_all.setObjectName("time_label")
         self.close_all.setStyleSheet("QPushButton { background-color: #ffcc5c; color: white; }" "QPushButton:pressed { background-color: #ffeead; }")
@@ -446,9 +446,9 @@ class Ui_MainWindow(object):
 
         
 
-        self.P10 = LinearGauge(self.centralwidget)
-        self.P10.setGeometry(QtCore.QRect(200, 330, 100, 60))
-        self.P10.setObjectName("P10")
+        # self.P10 = LinearGauge(self.centralwidget)
+        # self.P10.setGeometry(QtCore.QRect(200, 330, 100, 60))
+        # self.P10.setObjectName("P10")
         
         
         self.P21 = LinearGauge(self.centralwidget)

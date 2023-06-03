@@ -12,7 +12,7 @@ class LinearGauge(QWidget):
         self.setMaximumSize(100, 60)  # Increased height to accommodate the reading text
         self.value = 0
         self.max_value = 2000
-        self.value_colors = [(0, Qt.green), (1500, Qt.yellow), (1800, Qt.red), (2000, Qt.red)]
+        self.value_colors = [(0,Qt.blue),(150, Qt.green), (1500, Qt.yellow), (1800, Qt.red), (2000, Qt.red)]
         self.direction = 1  # 1 for increasing, -1 for decreasing
         self.timer = QBasicTimer()
         self.timer.start(10, self)
