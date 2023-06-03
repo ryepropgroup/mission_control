@@ -634,8 +634,8 @@ class Ui_MainWindow(object):
         self.date_label.setText(_translate("MainWindow", "TextLabel"))
 
         self.abort.setText(_translate("MainWindow", "ABORT"))
-        self.open_all.setText(_translate("MainWindow","PWR ON ALL"))
-        self.close_all.setText(_translate("MainWindow", "PWR OFF ALL"))
+        # self.open_all.setText(_translate("MainWindow","PWR ON ALL"))
+        # self.close_all.setText(_translate("MainWindow", "PWR OFF ALL"))
 
 
 
