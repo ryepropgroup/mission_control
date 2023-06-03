@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import QTime, QTimer, QDate, Qt
 
 #from linearGauge file to add linear gauge custom widgets
@@ -47,11 +48,8 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         self.p_and_id = QtWidgets.QLabel(self.centralwidget)
         self.p_and_id.setGeometry(QtCore.QRect(0, 0, 1441, 831))
-        font = QtGui.QFont()
-        font.setFamily("Helvetica")
-        self.p_and_id.setFont(font)
-        self.p_and_id.setText("")
-        self.p_and_id.setPixmap(QtGui.QPixmap("pid.png"))
+        image = QPixmap('pid.png')
+        self.p_and_id.setPixmap(image)
         self.p_and_id.setScaledContents(True)
         self.p_and_id.setObjectName("p_and_id")
 
@@ -195,7 +193,7 @@ class Ui_MainWindow(object):
 
 
         self.V21_MB_open = QtWidgets.QPushButton(self.centralwidget)
-        self.V21_MB_open.setGeometry(QtCore.QRect(510, 370, 71, 21))
+        self.V21_MB_open.setGeometry(QtCore.QRect(510, 390, 71, 21))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
         self.V21_MB_open.setFont(font)
@@ -203,7 +201,7 @@ class Ui_MainWindow(object):
         self.V21_MB_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }""QPushButton:pressed { background-color: #074d05; }")
         self.V21_MB_open.clicked.connect(lambda: self.open_valve(b"V21_SB_open\n"))
         self.V21_MB_close = QtWidgets.QPushButton(self.centralwidget)
-        self.V21_MB_close.setGeometry(QtCore.QRect(590, 370, 71, 21))
+        self.V21_MB_close.setGeometry(QtCore.QRect(590, 390, 71, 21))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
         self.V21_MB_close.setFont(font)
@@ -211,7 +209,7 @@ class Ui_MainWindow(object):
         self.V21_MB_close.setStyleSheet("QPushButton { background-color: red; color: white; }" "QPushButton:pressed { background-color: #4d0505; }")
         self.V21_MB_close.clicked.connect(lambda: self.close_valve(b"V21_SB_close\n"))
         self.V21_MB_state = QtWidgets.QLabel(self.centralwidget)
-        self.V21_MB_state.setGeometry(QtCore.QRect(550, 400, 71, 21))
+        self.V21_MB_state.setGeometry(QtCore.QRect(550, 420, 71, 21))
         font.setFamily("Helvetica")
         font.setPointSize(24)
         self.V21_MB_state.setFont(font)
@@ -351,7 +349,7 @@ class Ui_MainWindow(object):
         self.V35_S_close.setStyleSheet("QPushButton { background-color: red; color: white; }" "QPushButton:pressed { background-color: #4d0505; }")
         self.V35_S_close.clicked.connect(lambda: self.close_valve(b"V35_S_close\n"))
         self.V35_S_state = QtWidgets.QLabel(self.centralwidget)
-        self.V35_S_state.setGeometry(QtCore.QRect(660, 760, 71, 21))
+        self.V35_S_state.setGeometry(QtCore.QRect(640, 760, 71, 21))
         font.setFamily("Helvetica")
         font.setPointSize(24)
         self.V35_S_state.setFont(font)
