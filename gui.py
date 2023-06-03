@@ -53,7 +53,6 @@ class Ui_MainWindow(object):
         self.p_and_id.setText("")
         self.p_and_id.setPixmap(QtGui.QPixmap("pid.png"))
         self.p_and_id.setScaledContents(True)
-        
         self.p_and_id.setObjectName("p_and_id")
 
         self.mach_logo = QtWidgets.QLabel(self.centralwidget)
@@ -535,11 +534,11 @@ class Ui_MainWindow(object):
                 self.V12_S_state.setText(self.translateState(str(v12_s)))
 
                 self.V20_SB_state.setText(self.translateState(str(v20_sb)))
-                self.V21_SB_state.setText(self.translateState(str(v21_sb)))
+                self.V21_MB_state.setText(self.translateState(str(v21_sb)))
                 self.V23_SB_state.setText(self.translateState(str(v23_sb)))
 
                 self.V30_SB_state.setText(self.translateState(str(v30_sb)))
-                self.V31_SB_state.setText(self.translateState(str(v31_sb)))
+                self.V31_MB_state.setText(self.translateState(str(v31_sb)))
                 self.V34_SB_state.setText(self.translateState(str(v34_sb)))
                 self.V35_S_state.setText(self.translateState(str(v35_s)))
                 self.V36_SB_state.setText(self.translateState(str(v36_sb)))
