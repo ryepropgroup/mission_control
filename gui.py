@@ -510,9 +510,11 @@ class Ui_MainWindow(object):
                 v12_s  = json_data['valves']['V12_S']
 
                 v20_sb = json_data['valves']['V20_SB']
+                v21_sb = json_data['valves']['V21_SB']
                 v23_sb = json_data['valves']['V23_SB']
 
                 v30_sb = json_data['valves']['V30_SB']
+                v31_sb = json_data['valves']['V30_SB']
                 v34_sb = json_data['valves']['V34_SB']
                 v35_s =  json_data['valves']['V35_S']
                 v36_sb = json_data['valves']['V36_SB']
@@ -532,9 +534,11 @@ class Ui_MainWindow(object):
                 self.V12_S_state.setText(self.translateState(str(v12_s)))
 
                 self.V20_SB_state.setText(self.translateState(str(v20_sb)))
+                self.V21_SB_state.setText(self.translateState(str(v21_sb)))
                 self.V23_SB_state.setText(self.translateState(str(v23_sb)))
 
                 self.V30_SB_state.setText(self.translateState(str(v30_sb)))
+                self.V31_SB_state.setText(self.translateState(str(v31_sb)))
                 self.V34_SB_state.setText(self.translateState(str(v34_sb)))
                 self.V35_S_state.setText(self.translateState(str(v35_s)))
                 self.V36_SB_state.setText(self.translateState(str(v36_sb)))
@@ -554,10 +558,10 @@ class Ui_MainWindow(object):
                 pass
                 
     def translateState(self, string):
-        if string == "false": 
+        if string == "False": 
             field = "Closed"
             return(field)
-        elif string == "true": 
+        elif string == "True": 
             field = "Open"
             return(field)
 
