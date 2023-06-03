@@ -518,7 +518,7 @@ class Ui_MainWindow(object):
                 v36_sb = json_data['valves']['V36_SB']
                 v37_s  = json_data['valves']['V37_S']
 
-                t3_thermo = json_data['lj']['t3val']
+                t3_thermo = json_data['lj']['t1val']
 
                 print(json_data)
 
