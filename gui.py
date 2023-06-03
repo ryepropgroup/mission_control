@@ -77,7 +77,7 @@ class Ui_MainWindow(object):
         self.open_all.setGeometry(QtCore.QRect(150, 260, 90, 55))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
-        font.setPointSize(18)
+        font.setPointSize(14)
         self.open_all.setFont(font)
         self.open_all.setObjectName("time_label")
         self.open_all.setStyleSheet("QPushButton { background-color: #2ab7ca; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
@@ -87,7 +87,7 @@ class Ui_MainWindow(object):
         self.close_all.setGeometry(QtCore.QRect(250, 260, 90, 55))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
-        font.setPointSize(16)
+        font.setPointSize(12)
         self.close_all.setFont(font)
         self.close_all.setObjectName("time_label")
         self.close_all.setStyleSheet("QPushButton { background-color: #ffcc5c; color: white; }" "QPushButton:pressed { background-color: #ffeead; }")
@@ -658,8 +658,8 @@ class Ui_MainWindow(object):
         self.date_label.setText(_translate("MainWindow", "TextLabel"))
 
         self.abort.setText(_translate("MainWindow", "ABORT"))
-        self.open_all.setText(_translate("MainWindow","OPEN ALL"))
-        self.close_all.setText(_translate("MainWindow", "CLOSE ALL"))
+        self.open_all.setText(_translate("MainWindow","PWR ON ALL"))
+        self.close_all.setText(_translate("MainWindow", "PWR OFF ALL"))
 
 
 
