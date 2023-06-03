@@ -513,36 +513,10 @@ class Ui_MainWindow(object):
         s.close()
     
     def open_all_valves(self): 
-        self.V10_SB_open.clicked.connect(lambda: self.open_valve(b"V10_SB_open\n"))
-        self.V11_S_NO_open.clicked.connect(lambda: self.open_valve(b"V11_S_NO_open\n"))
-        self.V12_S_NO_open.clicked.connect(lambda: self.open_valve(b"V12_S_NO_open\n"))
-
-
-        self.V20_SB_open.clicked.connect(lambda: self.open_valve(b"V20_SB_open\n"))
-        self.V21_MB_open.clicked.connect(lambda: self.open_valve(b"V21_SB_open\n"))
-        self.V23_SB_NO_open.clicked.connect(lambda: self.open_valve(b"V23_SB_NO_open\n"))
-
-        self.V30_SB_open.clicked.connect(lambda: self.open_valve(b"V30_SB_open\n"))
-        self.V31_MB_open.clicked.connect(lambda: self.open_valve(b"V31_SB_open\n"))
-        self.V34_SB_NO_open.clicked.connect(lambda: self.open_valve(b"V34_SB_NO_open\n"))
-        self.V35_S_open.clicked.connect(lambda: self.open_valve(b"V35_S_open\n"))
-        self.V36_SB_open.clicked.connect(lambda: self.open_valve(b"V36_SB_open\n"))
-        self.V37_S_NO_open.clicked.connect(lambda: self.open_valve(b"V37_S_NO_open\n"))
+        s.send(b"openall")
 
     def close_all_valves(self): 
-        self.V10_SB_close.clicked.connect(lambda: self.close_valve(b"V10_SB_close\n"))
-        self.V11_S_NO_close.clicked.connect(lambda: self.close_valve(b"V11_S_close\n"))
-
-        self.V20_SB_close.clicked.connect(lambda: self.close_valve(b"V20_SB_close\n"))
-        self.V21_MB_close.clicked.connect(lambda: self.close_valve(b"V21_SB_close\n"))
-        self.V23_SB_NO_close.clicked.connect(lambda: self.close_valve(b"V23_SB_NO_close\n"))
-
-        self.V31_MB_close.clicked.connect(lambda: self.close_valve(b"V31_SB_close\n"))
-        self.V30_SB_close.clicked.connect(lambda: self.close_valve(b"V30_SB_close\n"))
-        self.V34_SB_NO_close.clicked.connect(lambda: self.close_valve(b"V34_SB_NO_close\n"))
-        self.V35_S_close.clicked.connect(lambda: self.close_valve(b"V35_S_close\n"))
-        self.V36_SB_close.clicked.connect(lambda: self.close_valve(b"V36_SB_close\n"))
-        self.V37_S_NO_close.clicked.connect(lambda: self.close_valve(b"V37_S_NO_close\n"))
+        s.send(b"closeall")
 
 
 
