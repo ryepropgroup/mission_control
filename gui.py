@@ -446,9 +446,9 @@ class Ui_MainWindow(object):
 
         
 
-        # self.P10 = LinearGauge(self.centralwidget)
-        # self.P10.setGeometry(QtCore.QRect(200, 330, 100, 60))
-        # self.P10.setObjectName("P10")
+        self.P10 = LinearGauge(self.centralwidget)
+        self.P10.setGeometry(QtCore.QRect(200, 330, 100, 60))
+        self.P10.setObjectName("P10")
         
         
         self.P21 = LinearGauge(self.centralwidget)
@@ -594,8 +594,10 @@ class Ui_MainWindow(object):
                 print(json_data)
 
                 #self.P21.setValue(int(p1_val))
-                self.P31.setValue(int(p2_val))
-                self.P21.setValue(int(p3_val))
+
+                self.P31.setValue(int(p1_val))
+                self.P21.setValue(int(p2_val))
+                self.P10.setValue(int(p3_val))
 
                 #set valve state
                 self.V10_SB_state.setText(self.translateState(str(v10_sb)))
