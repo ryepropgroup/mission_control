@@ -60,12 +60,46 @@ class Ui_MainWindow(object):
         self.mach_logo.setScaledContents(True)
         self.mach_logo.setObjectName("mach_logo")
 
+
+#200, 330, 100, 60
+        self.abort = QtWidgets.QPushButton(self.centralwidget)
+        self.abort.setGeometry(QtCore.QRect(50, 260, 90, 55))
+        font = QtGui.QFont()
+        font.setFamily("Helvetica")
+        font.setPointSize(22)
+        self.abort.setFont(font)
+        self.abort.setObjectName("time_label")
+        self.abort.setStyleSheet("QPushButton { background-color: red; color: white; }" "QPushButton:pressed { background-color: #4d0505; }")
+        self.abort.setText("ABORT")
+        self.abort.clicked.connect(self.abort_button)
+
+        self.open_all = QtWidgets.QPushButton(self.centralwidget)
+        self.open_all.setGeometry(QtCore.QRect(150, 260, 90, 55))
+        font = QtGui.QFont()
+        font.setFamily("Helvetica")
+        font.setPointSize(18)
+        self.open_all.setFont(font)
+        self.open_all.setObjectName("time_label")
+        self.open_all.setStyleSheet("QPushButton { background-color: #2ab7ca; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
+        self.open_all.clicked.connect(self.open_all_valves)
+
+        self.close_all = QtWidgets.QPushButton(self.centralwidget)
+        self.close_all.setGeometry(QtCore.QRect(250, 260, 90, 55))
+        font = QtGui.QFont()
+        font.setFamily("Helvetica")
+        font.setPointSize(16)
+        self.close_all.setFont(font)
+        self.close_all.setObjectName("time_label")
+        self.close_all.setStyleSheet("QPushButton { background-color: #ffcc5c; color: white; }" "QPushButton:pressed { background-color: #ffeead; }")
+        self.close_all.clicked.connect(self.open_all_valves)
+
+
         #time label
         self.time_label = QtWidgets.QLabel(self.centralwidget)
         self.time_label.setGeometry(QtCore.QRect(330, 30, 151, 31))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
-        font.setPointSize(10)
+        font.setPointSize(14)
         self.time_label.setFont(font)
         self.time_label.setAlignment(QtCore.Qt.AlignCenter)
         self.time_label.setObjectName("time_label")
@@ -75,10 +109,11 @@ class Ui_MainWindow(object):
         self.date_label.setGeometry(QtCore.QRect(330, 70, 151, 31))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
-        font.setPointSize(12)
+        font.setPointSize(19)
         self.date_label.setFont(font)
         self.date_label.setAlignment(QtCore.Qt.AlignCenter)
         self.date_label.setObjectName("date_label")
+
 
         #update date and time
         self.timer = QTimer()
@@ -472,6 +507,42 @@ class Ui_MainWindow(object):
         #update date and time 
         self.date_label.setText(current_time)
         self.time_label.setText(current_date)
+    
+    def abort_button(self): 
+        s.send("stop")
+        s.close()
+    
+    def open_all_valves(self): 
+        self.V10_SB_open.clicked.connect(lambda: self.open_valve(b"V10_SB_open\n"))
+        self.V11_S_NO_open.clicked.connect(lambda: self.open_valve(b"V11_S_open\n"))
+        self.V12_S_NO_open.clicked.connect(lambda: self.open_valve(b"V12_S_open\n"))
+
+
+        self.V20_SB_open.clicked.connect(lambda: self.open_valve(b"V20_SB_open\n"))
+        self.V21_MB_open.clicked.connect(lambda: self.open_valve(b"V21_SB_open\n"))
+        self.V23_SB_open.clicked.connect(lambda: self.open_valve(b"V23_SB_open\n"))
+
+        self.V30_SB_open.clicked.connect(lambda: self.open_valve(b"V30_SB_open\n"))
+        self.V31_MB_open.clicked.connect(lambda: self.open_valve(b"V31_SB_open\n"))
+        self.V34_SB_open.clicked.connect(lambda: self.open_valve(b"V34_SB_open\n"))
+        self.V35_S_open.clicked.connect(lambda: self.open_valve(b"V35_S_open\n"))
+        self.V36_SB_open.clicked.connect(lambda: self.open_valve(b"V36_SB_open\n"))
+        self.V37_S_open.clicked.connect(lambda: self.open_valve(b"V37_S_open\n"))
+
+    def close_all_valves(self): 
+        self.V10_SB_close.clicked.connect(lambda: self.close_valve(b"V10_SB_close\n"))
+        self.V11_S_NO_close.clicked.connect(lambda: self.close_valve(b"V11_S_close\n"))
+
+        self.V20_SB_close.clicked.connect(lambda: self.close_valve(b"V20_SB_close\n"))
+        self.V21_MB_close.clicked.connect(lambda: self.close_valve(b"V21_SB_close\n"))
+        self.V23_SB_close.clicked.connect(lambda: self.close_valve(b"V23_SB_close\n"))
+
+        self.V31_MB_close.clicked.connect(lambda: self.close_valve(b"V31_SB_close\n"))
+        self.V30_SB_close.clicked.connect(lambda: self.close_valve(b"V30_SB_close\n"))
+        self.V34_SB_close.clicked.connect(lambda: self.close_valve(b"V34_SB_close\n"))
+        self.V35_S_close.clicked.connect(lambda: self.close_valve(b"V35_S_close\n"))
+        self.V36_SB_close.clicked.connect(lambda: self.close_valve(b"V36_SB_close\n"))
+        self.V37_S_close.clicked.connect(lambda: self.close_valve(b"V37_S_close\n"))
 
 
 
@@ -585,6 +656,10 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.time_label.setText(_translate("MainWindow", "TextLabel"))
         self.date_label.setText(_translate("MainWindow", "TextLabel"))
+
+        self.abort.setText(_translate("MainWindow", "ABORT"))
+        self.open_all.setText(_translate("MainWindow","OPEN ALL"))
+        self.close_all.setText(_translate("MainWindow", "CLOSE ALL"))
 
 
 
