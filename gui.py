@@ -62,16 +62,16 @@ class Ui_MainWindow(object):
 
 
 #200, 330, 100, 60
-        self.abort = QtWidgets.QPushButton(self.centralwidget)
-        self.abort.setGeometry(QtCore.QRect(50, 260, 90, 55))
-        font = QtGui.QFont()
-        font.setFamily("Helvetica")
-        font.setPointSize(20)
-        self.abort.setFont(font)
-        self.abort.setObjectName("time_label")
-        self.abort.setStyleSheet("QPushButton { background-color: red; color: white; }" "QPushButton:pressed { background-color: #4d0505; }")
-        self.abort.setText("ABORT")
-        self.abort.clicked.connect(self.abort_button)
+        # self.abort = QtWidgets.QPushButton(self.centralwidget)
+        # self.abort.setGeometry(QtCore.QRect(50, 260, 90, 55))
+        # font = QtGui.QFont()
+        # font.setFamily("Helvetica")
+        # font.setPointSize(20)
+        # self.abort.setFont(font)
+        # self.abort.setObjectName("time_label")
+        # self.abort.setStyleSheet("QPushButton { background-color: red; color: white; }" "QPushButton:pressed { background-color: #4d0505; }")
+        # self.abort.setText("ABORT")
+        # self.abort.clicked.connect(self.abort_button)
 
         # self.open_all = QtWidgets.QPushButton(self.centralwidget)
         # self.open_all.setGeometry(QtCore.QRect(300, 200, 90, 55))
@@ -109,7 +109,7 @@ class Ui_MainWindow(object):
         self.date_label.setGeometry(QtCore.QRect(330, 70, 151, 31))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
-        font.setPointSize(19)
+        font.setPointSize(12)
         self.date_label.setFont(font)
         self.date_label.setAlignment(QtCore.Qt.AlignCenter)
         self.date_label.setObjectName("date_label")
@@ -649,7 +649,7 @@ class Ui_MainWindow(object):
         self.time_label.setText(_translate("MainWindow", "TextLabel"))
         self.date_label.setText(_translate("MainWindow", "TextLabel"))
 
-        self.abort.setText(_translate("MainWindow", "ABORT"))
+        #self.abort.setText(_translate("MainWindow", "ABORT"))
         # self.open_all.setText(_translate("MainWindow","PWR ON ALL"))
         # self.close_all.setText(_translate("MainWindow", "PWR OFF ALL"))
 
