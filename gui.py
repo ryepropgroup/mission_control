@@ -539,11 +539,11 @@ class Ui_MainWindow(object):
     #     self.time_label.setText(current_date)
     
     def power_off_all(self): 
-        s.send(b"stop")
+        s.send(b"stop\n")
         
     
     def valve_seq(self):
-        s.send(b"seq")
+        s.send(b"seq\n")
 
 
     def get_data(self): 
@@ -558,13 +558,13 @@ class Ui_MainWindow(object):
                 p2_val = json_data['lj']['p2val']
                 p3_val = json_data['lj']['p3val']
                 
-                #t3_thermo = json_data['lj']['t1val']
+                t3_thermo = json_data['lj']['t1val']
 
                 
   
                
                 
-               # self.T3_N2O_run.setText(str(t3_thermo))
+                self.T3_N2O_run.setText(str(t3_thermo))
 
                 #self.P21.setValue(int(p1_val))
              
