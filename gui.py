@@ -125,30 +125,30 @@ class Ui_MainWindow(object):
 
 
         #time label
-        self.time_label = QtWidgets.QLabel(self.centralwidget)
-        self.time_label.setGeometry(QtCore.QRect(330, 30, 151, 31))
-        font = QtGui.QFont()
-        font.setFamily("Helvetica")
-        font.setPointSize(14)
-        self.time_label.setFont(font)
-        self.time_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.time_label.setObjectName("time_label")
+        # self.time_label = QtWidgets.QLabel(self.centralwidget)
+        # self.time_label.setGeometry(QtCore.QRect(330, 30, 151, 31))
+        # font = QtGui.QFont()
+        # font.setFamily("Helvetica")
+        # font.setPointSize(14)
+        # self.time_label.setFont(font)
+        # self.time_label.setAlignment(QtCore.Qt.AlignCenter)
+        # self.time_label.setObjectName("time_label")
         
-        #date label
-        self.date_label = QtWidgets.QLabel(self.centralwidget)
-        self.date_label.setGeometry(QtCore.QRect(330, 70, 151, 31))
-        font = QtGui.QFont()
-        font.setFamily("Helvetica")
-        font.setPointSize(12)
-        self.date_label.setFont(font)
-        self.date_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.date_label.setObjectName("date_label")
+        # #date label
+        # self.date_label = QtWidgets.QLabel(self.centralwidget)
+        # self.date_label.setGeometry(QtCore.QRect(330, 70, 151, 31))
+        # font = QtGui.QFont()
+        # font.setFamily("Helvetica")
+        # font.setPointSize(12)
+        # self.date_label.setFont(font)
+        # self.date_label.setAlignment(QtCore.Qt.AlignCenter)
+        # self.date_label.setObjectName("date_label")
 
 
-        #update date and time
-        self.timer = QTimer()
-        self.timer.timeout.connect(self.update_date_time)
-        self.timer.start(1000)  # Update every 1000 milliseconds (1 second)
+        # #update date and time
+        # self.timer = QTimer()
+        # self.timer.timeout.connect(self.update_date_time)
+        # self.timer.start(1000)  # Update every 1000 milliseconds (1 second)
 
 
         #Valve 10 sb open, close, and state
@@ -528,15 +528,15 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    def update_date_time(self): 
+    # def update_date_time(self): 
 
-        #set the current date and time 
-        current_time = QTime.currentTime().toString(Qt.DefaultLocaleLongDate)
-        current_date = QDate.currentDate().toString(Qt.DefaultLocaleLongDate)
+    #     #set the current date and time 
+    #     current_time = QTime.currentTime().toString(Qt.DefaultLocaleLongDate)
+    #     current_date = QDate.currentDate().toString(Qt.DefaultLocaleLongDate)
 
-        #update date and time 
-        self.date_label.setText(current_time)
-        self.time_label.setText(current_date)
+    #     #update date and time 
+    #     self.date_label.setText(current_time)
+    #     self.time_label.setText(current_date)
     
     def power_off_all(self): 
         s.send(b"stop")
@@ -709,8 +709,8 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.time_label.setText(_translate("MainWindow", "TextLabel"))
-        self.date_label.setText(_translate("MainWindow", "TextLabel"))
+        # self.time_label.setText(_translate("MainWindow", "TextLabel"))
+        # self.date_label.setText(_translate("MainWindow", "TextLabel"))
 
         self.pwr_off.setText(_translate("MainWindow", "PWR OFF"))
         self.start_valve_seq.setText(_translate("MainWindow","VALVE SEQ"))
