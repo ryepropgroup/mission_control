@@ -29,7 +29,7 @@ import json
 
 
 import socket
-PORT = 6969
+PORT = 6970
 
 
 
@@ -42,7 +42,7 @@ from PyQt5.QtGui import QPainter, QPen, QFont, QColor, QPolygon
 
 
 class WorkerThread(QThread):
-    json_data_rec = pyqtSignal()
+    json_data_rec = pyqtSignal(object)
 
     def __init__(self):
         QThread.__init__(self)
@@ -52,9 +52,10 @@ class WorkerThread(QThread):
         
         while True:
             data = b''  # Initialize an empty byte string to store the received data
-
+            
             while True:
-                chunk = s.recv(32)  # Receive data in chunks of 1024 bytes
+                
+                chunk = s.recv(1024)  # Receive data in chunks of 1024 bytes
                 data += chunk  # Append the received data to the existing data
 
                 if b'\n' in chunk:
@@ -63,33 +64,13 @@ class WorkerThread(QThread):
             data = data.decode('utf-8')  # Convert the byte string to a Unicode string
             index = data.index('\n')
             #trunicate
-            #print(data[:index]) 
             json_data = data[:index].strip()
             self.json_data_rec.emit(json_data)
             
 
-        
-
-    def get_json_data(self):
-        data = b''  # Initialize an empty byte string to store the received data
-
-        while True:
-            chunk = s.recv(32)  # Receive data in chunks of 1024 bytes
-            data += chunk  # Append the received data to the existing data
-
-            if b'\n' in chunk:
-                break  # Break the loop when a newline character is received
-        #find index of new line
-        data = data.decode('utf-8')  # Convert the byte string to a Unicode string
-        index = data.index('\n')
-        #trunicate
-        #print(data[:index]) 
-        return data[:index].strip()
-
-        
-
-        
 class Ui_MainWindow(object):
+    #pwr off all buttoin 
+    #valve seq
     def __init__(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1440, 872)
@@ -111,26 +92,26 @@ class Ui_MainWindow(object):
 
 
 #200, 330, 100, 60
-        # self.abort = QtWidgets.QPushButton(self.centralwidget)
-        # self.abort.setGeometry(QtCore.QRect(50, 260, 90, 55))
-        # font = QtGui.QFont()
-        # font.setFamily("Helvetica")
-        # font.setPointSize(20)
-        # self.abort.setFont(font)
-        # self.abort.setObjectName("time_label")
-        # self.abort.setStyleSheet("QPushButton { background-color: red; color: white; }" "QPushButton:pressed { background-color: #4d0505; }")
-        # self.abort.setText("ABORT")
-        # self.abort.clicked.connect(self.abort_button)
+        self.pwr_off = QtWidgets.QPushButton(self.centralwidget)
+        self.pwr_off.setGeometry(QtCore.QRect(50, 260, 90, 55))
+        font = QtGui.QFont()
+        font.setFamily("Helvetica")
+        font.setPointSize(18)
+        self.pwr_off.setFont(font)
+        self.pwr_off.setObjectName("time_label")
+        self.pwr_off.setStyleSheet("QPushButton { background-color: #2ab7ca; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
+        self.pwr_off.setText("ABORT")
+        self.pwr_off.clicked.connect(self.power_off_all)
 
-        # self.open_all = QtWidgets.QPushButton(self.centralwidget)
-        # self.open_all.setGeometry(QtCore.QRect(300, 200, 90, 55))
-        # font = QtGui.QFont()
-        # font.setFamily("Helvetica")
-        # font.setPointSize(10)
-        # self.open_all.setFont(font)
-        # self.open_all.setObjectName("time_label")
-        # self.open_all.setStyleSheet("QPushButton { background-color: #2ab7ca; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
-        # self.open_all.clicked.connect(self.open_all_valves)
+        self.start_valve_seq = QtWidgets.QPushButton(self.centralwidget)
+        self.start_valve_seq.setGeometry(QtCore.QRect(150, 260, 90, 55))
+        font = QtGui.QFont()
+        font.setFamily("Helvetica")
+        font.setPointSize(16)
+        self.start_valve_seq.setFont(font)
+        self.start_valve_seq.setObjectName("time_label")
+        self.start_valve_seq.setStyleSheet("QPushButton { background-color: #ffcc5c; color: white; }" "QPushButton:pressed { background-color: #ffeead; }")
+        self.start_valve_seq.clicked.connect(self.valve_seq)
 
         # self.close_all = QtWidgets.QPushButton(self.centralwidget)
         # self.close_all.setGeometry(QtCore.QRect(400, 200, 90, 55))
@@ -557,63 +538,50 @@ class Ui_MainWindow(object):
         self.date_label.setText(current_time)
         self.time_label.setText(current_date)
     
-    def abort_button(self): 
+    def power_off_all(self): 
         s.send(b"stop")
-        s.close()
+        
     
-    def open_all_valves(self): 
-        s.send(b"openall")
-
-    def close_all_valves(self): 
-        s.send(b"closeall")
+    def valve_seq(self):
+        s.send(b"seq")
 
 
     def get_data(self): 
         thread = WorkerThread()
         
     def on_data_ready(self,data):
-       while True:
-            try:
+        try:
                 json_str = data
                 json_data = json.loads(json_str)
+                #print(json_data['lj'])
                 p1_val = json_data['lj']['p1val']
                 p2_val = json_data['lj']['p2val']
                 p3_val = json_data['lj']['p3val']
-                t3_thermo = json_data['lj']['t1val']
+                
+                #t3_thermo = json_data['lj']['t1val']
 
-                # v11_s  = json_data['valves']['V11_S']
-                # v10_sb = json_data['valves']['V10_SB']
-                # v12_s  = json_data['valves']['V12_S']
-
-                # v20_sb = json_data['valves']['V20_SB']
-                # v21_sb = json_data['valves']['V21_SB']
-                # v23_sb = json_data['valves']['V23_SB']
-
-                # v30_sb = json_data['valves']['V30_SB']
-                # v31_sb = json_data['valves']['V30_SB']
-                # v34_sb = json_data['valves']['V34_SB']
-                # v35_s =  json_data['valves']['V35_S']
-                # v36_sb = json_data['valves']['V36_SB']
-                # v37_s  = json_data['valves']['V37_S']
-
+                
+  
                
                 
-                self.T3_N2O_run.setText(str(t3_thermo))
+               # self.T3_N2O_run.setText(str(t3_thermo))
 
                 #self.P21.setValue(int(p1_val))
+             
+        #         self.P31.setValue(int(p1_val))
+                
+        
+
                 try:
                     self.P31.setValue(int(p1_val))
-                except Exception:
+                    self.P21.setValue(int(p2_val))
+                    self.P10.setValue(int(p3_val))
+                except ValueError as valueError:
                     pass
-            except json.JSONDecodeError: 
-                pass
-
-            try:
-                self.P31.setValue(int(p1_val))
-                self.P21.setValue(int(p2_val))
-                self.P10.setValue(int(p3_val))
-            except Exception:
-                    pass
+                #print(json_data)
+        except json.JSONDecodeError as e:
+            pass
+        
 
 
 
@@ -665,6 +633,8 @@ class Ui_MainWindow(object):
                 t3_thermo = json_data['lj']['t1val']
 
                 print(json_data)
+
+                
 
           
                 
@@ -719,9 +689,9 @@ class Ui_MainWindow(object):
         try: 
             s.connect(("127.0.0.1", PORT)) #connect to mini server
             print("connected")
-            thread = WorkerThread()         #make instance of working class
-            thread.json_data_rec.connect(self.on_data_ready)        #tie func to working class
-            WorkerThread.start()                                    #start thread
+            self.thread = WorkerThread()         #make instance of working class
+            self.thread.json_data_rec.connect(self.on_data_ready)        #tie func to working class
+            self.thread.start()                                    #start thread
             print('thread started')
 
         except Exception as e  : 
@@ -742,8 +712,8 @@ class Ui_MainWindow(object):
         self.time_label.setText(_translate("MainWindow", "TextLabel"))
         self.date_label.setText(_translate("MainWindow", "TextLabel"))
 
-        #self.abort.setText(_translate("MainWindow", "ABORT"))
-        # self.open_all.setText(_translate("MainWindow","PWR ON ALL"))
+        self.pwr_off.setText(_translate("MainWindow", "PWR OFF"))
+        self.start_valve_seq.setText(_translate("MainWindow","VALVE SEQ"))
         # self.close_all.setText(_translate("MainWindow", "PWR OFF ALL"))
 
 
