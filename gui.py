@@ -15,6 +15,8 @@ from PyQt5.QtCore import QTime, QTimer, QDate, Qt
 #from linearGauge file to add linear gauge custom widgets
 from updated_gauge import LinearGauge
 
+
+from verticaltempgauge import VerticalTempLinearGauge
 from functools import partial
 
 #allow different parts of the program to run concurrently 
@@ -81,7 +83,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         self.p_and_id = QtWidgets.QLabel(self.centralwidget)
         self.p_and_id.setGeometry(QtCore.QRect(0, 0, 1441, 831))
-        image = QPixmap('fpid.png')
+        image = QPixmap('pid.png')
         self.p_and_id.setPixmap(image)
         self.p_and_id.setScaledContents(True)
         self.p_and_id.setObjectName("p_and_id")
@@ -96,7 +98,7 @@ class Ui_MainWindow(object):
 
 #200, 330, 100, 60
         self.pwr_off = QtWidgets.QPushButton(self.centralwidget)
-        self.pwr_off.setGeometry(QtCore.QRect(340, 110, 90, 55))
+        self.pwr_off.setGeometry(QtCore.QRect(20, 230, 90, 55))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
         font.setPointSize(18)
@@ -107,7 +109,7 @@ class Ui_MainWindow(object):
         self.pwr_off.clicked.connect(self.power_off_all)
 
         self.start_valve_seq = QtWidgets.QPushButton(self.centralwidget)
-        self.start_valve_seq.setGeometry(QtCore.QRect(340, 170, 90, 55))
+        self.start_valve_seq.setGeometry(QtCore.QRect(30, 710, 90, 55))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
         font.setPointSize(16)
@@ -403,7 +405,7 @@ class Ui_MainWindow(object):
 
 
         self.V33_SB_NO_open = QtWidgets.QPushButton(self.centralwidget)
-        self.V33_SB_NO_open.setGeometry(QtCore.QRect(708, 464, 71, 21))
+        self.V33_SB_NO_open.setGeometry(QtCore.QRect(800, 529, 71, 21))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
         self.V33_SB_NO_open.setFont(font)
@@ -411,7 +413,7 @@ class Ui_MainWindow(object):
         self.V33_SB_NO_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }""QPushButton:pressed { background-color: #074d05; }")
         self.V33_SB_NO_open.clicked.connect(lambda: self.open_valve(b"V33_SB_NO_open\n"))
         self.V33_SB_NO_close = QtWidgets.QPushButton(self.centralwidget)
-        self.V33_SB_NO_close.setGeometry(QtCore.QRect(708, 489 , 71, 21))
+        self.V33_SB_NO_close.setGeometry(QtCore.QRect(800, 554 , 71, 21))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
         self.V33_SB_NO_close.setFont(font)
@@ -423,7 +425,7 @@ class Ui_MainWindow(object):
 
         
         self.V34_S_open = QtWidgets.QPushButton(self.centralwidget)
-        self.V34_S_open.setGeometry(QtCore.QRect(714, 347, 71, 21))
+        self.V34_S_open.setGeometry(QtCore.QRect(633, 380, 71, 21))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
         self.V34_S_open.setFont(font)
@@ -431,7 +433,7 @@ class Ui_MainWindow(object):
         self.V34_S_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }""QPushButton:pressed { background-color: #074d05; }")
         self.V34_S_open.clicked.connect(lambda: self.open_valve(b"V34_S_open\n"))
         self.V34_S_close = QtWidgets.QPushButton(self.centralwidget)
-        self.V34_S_close.setGeometry(QtCore.QRect(714, 371, 71, 21))
+        self.V34_S_close.setGeometry(QtCore.QRect(633, 405, 71, 21))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
         self.V34_S_close.setFont(font)
@@ -483,7 +485,7 @@ class Ui_MainWindow(object):
         # self.V35_S_state.setStyleSheet("color: blue; font-size: 16px;") 
 
         self.V36_SB_open = QtWidgets.QPushButton(self.centralwidget)
-        self.V36_SB_open.setGeometry(QtCore.QRect(715, 638, 71, 21))
+        self.V36_SB_open.setGeometry(QtCore.QRect(713, 745, 71, 21))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
         self.V36_SB_open.setFont(font)
@@ -491,7 +493,7 @@ class Ui_MainWindow(object):
         self.V36_SB_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }" "QPushButton:pressed { background-color: #074d05; }")
         self.V36_SB_open.clicked.connect(lambda: self.open_valve(b"V36_SB_open\n"))
         self.V36_SB_close = QtWidgets.QPushButton(self.centralwidget)
-        self.V36_SB_close.setGeometry(QtCore.QRect(715, 663, 71, 21))
+        self.V36_SB_close.setGeometry(QtCore.QRect(713, 770, 71, 21))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
         self.V36_SB_close.setFont(font)
@@ -585,21 +587,13 @@ class Ui_MainWindow(object):
         self.P32.setObjectName("P32")
 
 
-        self.T2_ETH_RUN = QtWidgets.QLabel(self.centralwidget)
-        self.T2_ETH_RUN.setGeometry(QtCore.QRect(775, 272, 71, 21))
-        font.setFamily("Helvetica")
-        font.setPointSize(24)
-        self.T2_ETH_RUN.setFont(font)
-        self.T2_ETH_RUN.setAlignment(QtCore.Qt.AlignCenter)
-        self.T2_ETH_RUN.setStyleSheet("color: black; font-size: 14px;") 
+        self.T2_ETH_RUN = VerticalTempLinearGauge(self.centralwidget)
+        self.T2_ETH_RUN.setGeometry(QtCore.QRect(804, 260, 60, 100))
+        self.T2_ETH_RUN.setObjectName("T2 ETH RUN")
  
-        self.T3_N2O_run = QtWidgets.QLabel(self.centralwidget)
-        self.T3_N2O_run.setGeometry(QtCore.QRect(818, 543, 71, 21))
-        font.setFamily("Helvetica")
-        font.setPointSize(24)
-        self.T3_N2O_run.setFont(font)
-        self.T3_N2O_run.setAlignment(QtCore.Qt.AlignCenter)
-        self.T3_N2O_run.setStyleSheet("color: black; font-size: 14px;") 
+        self.T3_N2O_run = VerticalTempLinearGauge(self.centralwidget)
+        self.T3_N2O_run.setGeometry(QtCore.QRect(698, 435, 60, 100))
+        self.T3_N2O_run.setObjectName("T3 N20 RUN")
  
 
 
@@ -870,9 +864,6 @@ class Ui_MainWindow(object):
         self.V38_S_NO_close.setText(_translate("MainWindow", "CLOSE"))
     #    # self.V37_S_state.setText(_translate("MainWindow", "STATE"))
 
-        self.T2_ETH_RUN.setText(_translate("MainWindow", "Temp"))
-
-        self.T3_N2O_run.setText(_translate("MainWindow", "Temp"))
 
         
 

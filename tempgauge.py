@@ -4,7 +4,7 @@ from PyQt5.QtCore import Qt, QRect, QBasicTimer, QPoint
 from PyQt5.QtGui import QPainter, QPen, QFont, QColor, QPolygon
 
 
-class LinearGauge(QWidget):
+class LinearGaugeTemp(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setMaximumSize(100, 60)  # Increased height to accommodate the reading text
