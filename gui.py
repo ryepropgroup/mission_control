@@ -825,7 +825,7 @@ class Ui_MainWindow(object):
 
                 v30_sb = json_data['valves']['V30_SB']
                 v31_sb = json_data['valves']['V31_SB']
-                v32_s  = json_data['valves']['V32_SB']
+                v32_s  = json_data['valves']['V32_S']
                 v33_sb = json_data['valves']['V33_SB']
                 v34_s  = json_data['valves']['V34_S']
                 v35_sb = json_data['valves']['V35_SB']
@@ -834,8 +834,9 @@ class Ui_MainWindow(object):
                 v38_s  = json_data['valves']['V38_S']
 
 
+                t2_thermo = json_data['lj']['t2val']
+                t3_thermo = json_data['lj']['t3val']
 
-                t3_thermo = json_data['lj']['t1val']
 
                 print(json_data)
 
@@ -850,6 +851,10 @@ class Ui_MainWindow(object):
                 self.P30.setValue(int(p30_val))
                 self.P31.setValue(int(p31_val))
                 self.P32.setValue(int(p32_val))
+
+
+                self.T2_ETH_RUN.setValue(int(t2_thermo))
+                self.T3_N2O_run.setValue(int(t3_thermo))
                 
 
 
