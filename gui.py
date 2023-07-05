@@ -105,7 +105,7 @@ class Ui_MainWindow(object):
         self.pwr_off.setFont(font)
         self.pwr_off.setObjectName("time_label")
         self.pwr_off.setStyleSheet("QPushButton { background-color: #2ab7ca; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
-        self.pwr_off.setText("ABORT")
+        self.pwr_off.setText("RESET")
         self.pwr_off.clicked.connect(self.power_off_all)
 
 #20, 500, 90, 55
@@ -122,7 +122,7 @@ class Ui_MainWindow(object):
         self.four_one_oneF.clicked.connect(self.four11f)
 
         self.four_one_oneO = QtWidgets.QPushButton(self.centralwidget)
-        self.four_one_oneO.setGeometry(QtCore.QRect(120, 600, 90, 55))
+        self.four_one_oneO.setGeometry(QtCore.QRect(120, 700, 90, 55))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
         font.setPointSize(18)
@@ -781,7 +781,10 @@ class Ui_MainWindow(object):
     
     
     def power_off_all(self): 
-        s.send(b"stop\n")
+        s.send(b"off\n")
+    
+    def cavv(self): 
+        s.send(b"cavv\n")
     
     def four11f(self): 
         s.send(b"411f\n")
@@ -1101,7 +1104,7 @@ class Ui_MainWindow(object):
         # self.time_label.setText(_translate("MainWindow", "TextLabel"))
         # self.date_label.setText(_translate("MainWindow", "TextLabel"))
 
-        self.pwr_off.setText(_translate("MainWindow", "PWR OFF"))
+        self.pwr_off.setText(_translate("MainWindow", "RESET"))
 
         self.three_six.setText(_translate("MainWindow","3.6"))
         self.four_one_oneF.setText(_translate("MainWindow", "4.1.1f"))
