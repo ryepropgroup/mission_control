@@ -785,12 +785,12 @@ class Ui_MainWindow(object):
                 v37_sb = json_data['valves']['V37']
                 v38_s  = json_data['valves']['V38_NO']
 
-                print(self.translateStateButtons(v10_sb))
+                
 
 
-                if self.translateStateButtons(v10_sb) == True: 
+                if v10_sb == "True": 
                     self.V10_SB_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
-                elif self.translateStateButtons(v10_sb) == False: 
+                elif v10_sb == "False": 
                     self.V10_SB_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
                     
 
