@@ -900,11 +900,11 @@ class Ui_MainWindow(object):
     #        sys.exit(1)
 
     def open_valve(self,name): 
-        #s.send(name)
+        s.send(name)
         print("open")
   
     def close_valve(self,name): 
-       # s.send(name)
+        s.send(name)
         print("close")
 
     def retranslateUi(self, MainWindow):
