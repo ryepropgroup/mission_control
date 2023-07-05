@@ -788,20 +788,21 @@ class Ui_MainWindow(object):
                 
 
 
-                if v10_sb == "True": 
-                    self.V10_SB_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
-                elif v10_sb == "False": 
+                if str(v10_sb) == "True": 
                     self.V10_SB_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
-                    
+                elif str(v10_sb) == "False": 
+                    self.V10_SB_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
 
+                if str(v11_s) == "True": 
+                    self.V11_S_NO_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                elif str(v11_s) == "False": 
+                    self.V11_S_NO_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+ 
 
-                
-  
-               
-                
-                
-                
-        
+                if str(v12_s) == "True": 
+                    self.V12_S_NO_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                elif str(v12_s) == "False": 
+                    self.V12_S_NO_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
 
                 try:
                     self.P31.setValue(int(p1_val))
@@ -867,7 +868,7 @@ class Ui_MainWindow(object):
             field = "Closed"
             return(field)
         elif string == "True": 
-            field = "Open"
+            field = "Opened"
             return(field)
     
     def translateStateButtons(self, string): 
