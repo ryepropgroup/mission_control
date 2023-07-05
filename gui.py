@@ -790,19 +790,155 @@ class Ui_MainWindow(object):
 
                 if str(v10_sb) == "True": 
                     self.V10_SB_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
-                elif str(v10_sb) == "False": 
-                    self.V10_SB_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                    self.V10_SB_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
 
+                elif str(v10_sb) == "False": 
+                    self.V10_SB_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
+                    self.V10_SB_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                    
                 if str(v11_s) == "True": 
                     self.V11_S_NO_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
-                elif str(v11_s) == "False": 
+                    self.V11_S_NO_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
+
+                elif str(v11_s) == "False":
+                    self.V11_S_NO_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
                     self.V11_S_NO_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+
  
 
                 if str(v12_s) == "True": 
                     self.V12_S_NO_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
-                elif str(v12_s) == "False": 
+                    self.V12_S_NO_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
+
+                elif str(v12_s) == "False":
+                    self.V12_S_NO_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
                     self.V12_S_NO_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+
+                if str(v20_sb) == "True": 
+                    self.V20_SB_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                    self.V20_SB_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
+
+                elif str(v20_sb) == "False":
+                    self.V20_SB_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
+                    self.V20_SB_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                
+                if str(v21_sb) == "True": 
+                    self.V21_MB_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                    self.V21_MB_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
+
+                elif str(v21_sb) == "False":
+                    self.V21_MB_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
+                    self.V21_MB_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+
+                if str(v21_sb) == "True": 
+                    self.V21_MB_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                    self.V21_MB_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
+
+                elif str(v21_sb) == "False":
+                    self.V21_MB_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
+                    self.V21_MB_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                
+                if str(v22_sb) == "True": 
+                    self.V22_SB_NO_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                    self.V22_SB_NO_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
+
+                elif str(v22_sb) == "False":
+                    self.V22_SB_NO_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
+                    self.V22_SB_NO_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+
+                if str(v23_sb) == "True": 
+                    self.V23_SB_NO_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                    self.V23_SB_NO_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
+
+                elif str(v23_sb) == "False":
+                    self.V23_SB_NO_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
+                    self.V23_SB_NO_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                
+                if str(v30_sb) == "True": 
+                    self.V30_SB_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                    self.V30_SB_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
+
+                elif str(v30_sb) == "False":
+                    self.V30_SB_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
+                    self.V30_SB_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+
+                if str(v31_sb) == "True": 
+                    self.V31_MB_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                    self.V31_MB_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
+
+                elif str(v31_sb) == "False":
+                    self.V31_MB_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
+                    self.V31_MB_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                
+                if str(v32_s) == "True": 
+                    self.V32_S_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                    self.V32_S_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
+
+                elif str(v32_s) == "False":
+                    self.V32_S_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
+                    self.V32_S_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                
+                if str(v33_sb) == "True": 
+                    self.V33_SB_NO_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                    self.V33_SB_NO_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
+
+                elif str(v33_sb) == "False":
+                    self.V33_SB_NO_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
+                    self.V33_SB_NO_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+
+                if str(v34_s) == "True": 
+                    self.V34_S_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                    self.V34_S_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
+
+                elif str(v34_s) == "False":
+                    self.V34_S_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
+                    self.V34_S_close .setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+
+                if str(v35_sb) == "True": 
+                    self.V35_SB_NO_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                    self.V35_SB_NO_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
+
+                elif str(v35_sb) == "False":
+                    self.V35_SB_NO_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
+                    self.V35_SB_NO_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+
+                if str(v36_s) == "True": 
+                    self.V36_S_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                    self.V36_S_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
+
+                elif str(v36_s) == "False":
+                    self.V36_S_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
+                    self.V36_S_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+
+                if str(v37_sb) == "True": 
+                    self.V37_SB_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                    self.V37_SB_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
+
+                elif str(v37_sb) == "False":
+                    self.V37_SB_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
+                    self.V37_SB_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                
+                if str(v38_s) == "True": 
+                    self.V38_S_NO_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                    self.V38_S_NO_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
+
+                elif str(v38_s) == "False":
+                    self.V38_S_NO_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
+                    self.V38_S_NO_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 try:
                     self.P31.setValue(int(p1_val))
