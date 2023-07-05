@@ -755,9 +755,9 @@ class Ui_MainWindow(object):
                 json_str = data
                 json_data = json.loads(json_str)
                 #print(json_data['lj'])
-                p1_val = json_data['lj']['p1val']
-                p2_val = json_data['lj']['p2val']
-                p3_val = json_data['lj']['p3val']
+                p1_val = json_data['lj']['p10val']
+                p2_val = json_data['lj']['p20val']
+                p3_val = json_data['lj']['p30val']
                 
                 t3_thermo = json_data['lj']['t1val']
 
@@ -765,7 +765,8 @@ class Ui_MainWindow(object):
   
                
                 
-                self.T2_ETH_RUN.setText(str(t3_thermo))
+                # self.T2_ETH_RUN.setValue(str(t2_thermo))
+                # self.T3_N2O_run.setValue(str())
 
                 #self.P21.setValue(int(p1_val))
              
