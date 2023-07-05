@@ -34,7 +34,7 @@ import json
 
 
 import socket
-PORT = 6970
+PORT = 6969
 
 
 
@@ -756,10 +756,12 @@ class Ui_MainWindow(object):
                 json_data = json.loads(json_str)
                 #print(json_data['lj'])
                 p1_val = json_data['lj']['p10val']
-                p2_val = json_data['lj']['p20val']
+                p2_val = json_data['lj']['p21val']
                 p3_val = json_data['lj']['p30val']
                 
-                t3_thermo = json_data['lj']['t1val']
+
+                t2_thermo = json_data['lj']['t2val']
+                t3_thermo = json_data['lj']['t3val']
 
                 
   
@@ -778,6 +780,8 @@ class Ui_MainWindow(object):
                     self.P31.setValue(int(p1_val))
                     self.P21.setValue(int(p2_val))
                     self.P10.setValue(int(p3_val))
+                    self.T2_ETH_RUN.setValue(int(t2_thermo))
+                    self.T3_N2O_run.setValue(int(t3_thermo))
                 except ValueError as valueError:
                     pass
                 #print(json_data)
@@ -813,16 +817,16 @@ class Ui_MainWindow(object):
             try:
                 json_str = self.receive_until_newline()
                 json_data = json.loads(json_str)
-                p10_val = json_data['lj']['p10val']
+                # p10_val = json_data['lj']['p10val']
 
-                #p20_val = json_data['lj']['p20val']
-                p21_val = json_data['lj']['p21val']
-                # p22_val = json_data['lj']['p22val']
+                # #p20_val = json_data['lj']['p20val']
+                # p21_val = json_data['lj']['p21val']
+                # # p22_val = json_data['lj']['p22val']
 
 
-                p30_val = json_data['lj']['p30val']
-                # p31_val = json_data['lj']['p31val']
-                # p32_val = json_data['lj']['p32val']
+                # p30_val = json_data['lj']['p30val']
+                # # p31_val = json_data['lj']['p31val']
+                # # p32_val = json_data['lj']['p32val']
 
                 v11_s  = json_data['valves']['V11_S']
                 v10_sb = json_data['valves']['V10_SB']
@@ -852,20 +856,19 @@ class Ui_MainWindow(object):
 
                 
                 #updating the pressure gauges
-                self.P10.setValue(int(p10_val))
+                # self.P10.setValue(int(p10_val))
 
-                # self.P20.setValue(int(p20_val))
-                self.P21.setValue(int(p21_val))
-                # self.P22.setValue(int(p22_val))
+                # # self.P20.setValue(int(p20_val))
+                # self.P21.setValue(int(p21_val))
+                # # self.P22.setValue(int(p22_val))
 
-                self.P30.setValue(int(p30_val))
-                # self.P31.setValue(int(p31_val))
+                # self.P30.setValue(int(p30_val))
+                # # self.P31.setValue(int(p31_val))
                 # self.P32.setValue(int(p32_val))
 
 
                 #update thermocouples
-                self.T2_ETH_RUN.setValue(int(t2_thermo))
-                self.T3_N2O_run.setValue(int(t3_thermo))
+               
                 
 
 
