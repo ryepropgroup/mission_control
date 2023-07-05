@@ -83,7 +83,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         self.p_and_id = QtWidgets.QLabel(self.centralwidget)
         self.p_and_id.setGeometry(QtCore.QRect(0, 0, 1441, 831))
-        image = QPixmap('pg.png')
+        image = QPixmap('pg2.png')
         self.p_and_id.setPixmap(image)
         self.p_and_id.setScaledContents(True)
         self.p_and_id.setObjectName("p_and_id")
@@ -96,9 +96,9 @@ class Ui_MainWindow(object):
         self.mach_logo.setObjectName("mach_logo")
 
 
-        #200, 330, 100, 60
+        #120, 600, 90, 55
         self.pwr_off = QtWidgets.QPushButton(self.centralwidget)
-        self.pwr_off.setGeometry(QtCore.QRect(130, 600, 90, 55))
+        self.pwr_off.setGeometry(QtCore.QRect(20, 600, 90, 55))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
         font.setPointSize(18)
@@ -108,78 +108,118 @@ class Ui_MainWindow(object):
         self.pwr_off.setText("ABORT")
         self.pwr_off.clicked.connect(self.power_off_all)
 
+#20, 500, 90, 55
 
-        self.start_valve_seq = QtWidgets.QPushButton(self.centralwidget)
-        self.start_valve_seq.setGeometry(QtCore.QRect(20, 600, 90, 55))
+        self.four_one_oneF = QtWidgets.QPushButton(self.centralwidget)
+        self.four_one_oneF.setGeometry(QtCore.QRect(20, 700, 90, 55))
+        font = QtGui.QFont()
+        font.setFamily("Helvetica")
+        font.setPointSize(18)
+        self.four_one_oneF.setFont(font)
+        self.four_one_oneF.setObjectName("411")
+        self.four_one_oneF.setStyleSheet("QPushButton { background-color: orange; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
+        self.four_one_oneF.setText("4.1.1f")
+        self.four_one_oneF.clicked.connect(self.four11f)
+
+        self.four_one_oneO = QtWidgets.QPushButton(self.centralwidget)
+        self.four_one_oneO.setGeometry(QtCore.QRect(120, 600, 90, 55))
+        font = QtGui.QFont()
+        font.setFamily("Helvetica")
+        font.setPointSize(18)
+        self.four_one_oneO.setFont(font)
+        self.four_one_oneO.setObjectName("411")
+        self.four_one_oneO.setStyleSheet("QPushButton { background-color: #7120FF; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
+        self.four_one_oneO.setText("4.1.1o")
+        self.four_one_oneO.clicked.connect(self.four11o)
+        
+        
+
+        self.three_six = QtWidgets.QPushButton(self.centralwidget)
+        self.three_six.setGeometry(QtCore.QRect(220, 600, 90, 55))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
         font.setPointSize(16)
-        self.start_valve_seq.setFont(font)
-        self.start_valve_seq.setObjectName("time_label")
-        self.start_valve_seq.setStyleSheet("QPushButton { background-color: #ffcc5c; color: white; }" "QPushButton:pressed { background-color: #ffeead; }")
-        self.start_valve_seq.clicked.connect(self.valve_seq)
+        self.three_six.setFont(font)
+        self.three_six.setObjectName("3.6")
+        self.three_six.setText("3.6")
+        self.three_six.setStyleSheet("QPushButton { background-color: #ffcc5c; color: white; }" "QPushButton:pressed { background-color: #ffeead; }")
+        self.three_six.clicked.connect(self.three__six)
 
 
-        self.stack_light_blue = QtWidgets.QPushButton(self.centralwidget)
-        self.stack_light_blue.setGeometry(QtCore.QRect(30, 745, 70, 55))
+        self.three_six = QtWidgets.QPushButton(self.centralwidget)
+        self.three_six.setGeometry(QtCore.QRect(220, 600, 90, 55))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
-        font.setPointSize(18)
-        self.stack_light_blue.setFont(font)
-        self.stack_light_blue.setObjectName("blue")
-        self.stack_light_blue.setStyleSheet("QPushButton { background-color: blue; color: white; }")
+        font.setPointSize(16)
+        self.three_six.setFont(font)
+        self.three_six.setObjectName("3.6")
+        self.three_six.setText("3.6")
+        self.three_six.setStyleSheet("QPushButton { background-color: #ffcc5c; color: white; }" "QPushButton:pressed { background-color: #ffeead; }")
+        self.three_six.clicked.connect(self.three_five_one)
+
+
+        # self.stack_light_blue = QtWidgets.QPushButton(self.centralwidget)
+        # self.stack_light_blue.setGeometry(QtCore.QRect(30, 745, 70, 55))
+        # font = QtGui.QFont()
+        # font.setFamily("Helvetica")
+        # font.setPointSize(18)
+        # self.stack_light_blue.setFont(font)
+        # self.stack_light_blue.setObjectName("blue")
+        # self.stack_light_blue.setStyleSheet("QPushButton { background-color: blue; color: white; }")
+
+        
     
-        #self.stack_light_blue.clicked.connect(self.power_off_all)
+        # #self.stack_light_blue.clicked.connect(self.power_off_all)
 
 
-        self.stack_light_green = QtWidgets.QPushButton(self.centralwidget)
-        self.stack_light_green.setGeometry(QtCore.QRect(120, 745, 70, 55))
-        font = QtGui.QFont()
-        font.setFamily("Helvetica")
-        font.setPointSize(18)
-        self.stack_light_green.setFont(font)
-        self.stack_light_green.setObjectName("GREEM")
-        self.stack_light_green.setStyleSheet("QPushButton { background-color: #05c817; color: white; }")
-        #self.stack_light_blue.clicked.connect(self.power_off_all)
+        # self.stack_light_green = QtWidgets.QPushButton(self.centralwidget)
+        # self.stack_light_green.setGeometry(QtCore.QRect(120, 745, 70, 55))
+        # font = QtGui.QFont()
+        # font.setFamily("Helvetica")
+        # font.setPointSize(18)
+        # self.stack_light_green.setFont(font)
+        # self.stack_light_green.setObjectName("GREEM")
+        # self.stack_light_green.setStyleSheet("QPushButton { background-color: #05c817; color: white; }")
+        # #self.stack_light_blue.clicked.connect(self.power_off_all)
 
 
-        self.stack_light_yellow = QtWidgets.QPushButton(self.centralwidget)
-        self.stack_light_yellow.setGeometry(QtCore.QRect(30, 679, 70, 55))
-        font = QtGui.QFont()
-        font.setFamily("Helvetica")
-        font.setPointSize(18)
-        self.stack_light_yellow.setFont(font)
-        self.stack_light_yellow.setObjectName("yeellers")
-        self.stack_light_yellow.setStyleSheet("QPushButton { background-color: #9e5e10; color: white; }")
-        #self.stack_light_blue.clicked.connect(self.power_off_all)
+        # self.stack_light_yellow = QtWidgets.QPushButton(self.centralwidget)
+        # self.stack_light_yellow.setGeometry(QtCore.QRect(30, 679, 70, 55))
+        # font = QtGui.QFont()
+        # font.setFamily("Helvetica")
+        # font.setPointSize(18)
+        # self.stack_light_yellow.setFont(font)
+        # self.stack_light_yellow.setObjectName("yeellers")
+        # self.stack_light_yellow.setStyleSheet("QPushButton { background-color: #9e5e10; color: white; }")
+        # #self.stack_light_blue.clicked.connect(self.power_off_all)
 
 
-        self.stack_light_red = QtWidgets.QPushButton(self.centralwidget)
-        self.stack_light_red.setGeometry(QtCore.QRect(120, 679, 70, 55))
-        font = QtGui.QFont()
-        font.setFamily("Helvetica")
-        font.setPointSize(18)
-        self.stack_light_red.setFont(font)
-        self.stack_light_red.setObjectName("reddeadredemption")
-        self.stack_light_red.setStyleSheet("QPushButton { background-color: #ad1d1d; color: white; }" )
-        #self.stack_light_blue.clicked.connect(self.power_off_all)
+        # self.stack_light_red = QtWidgets.QPushButton(self.centralwidget)
+        # self.stack_light_red.setGeometry(QtCore.QRect(120, 679, 70, 55))
+        # font = QtGui.QFont()
+        # font.setFamily("Helvetica")
+        # font.setPointSize(18)
+        # self.stack_light_red.setFont(font)
+        # self.stack_light_red.setObjectName("reddeadredemption")
+        # self.stack_light_red.setStyleSheet("QPushButton { background-color: #ad1d1d; color: white; }" )
+        # #self.stack_light_blue.clicked.connect(self.power_off_all)
 
 
         
 
         
         
-        self.pad_s = QtWidgets.QPushButton(self.centralwidget)
-        self.pad_s.setGeometry(QtCore.QRect(300, 710, 90, 55))
-        self.pad_s.setCheckable(True)
-        self.pad_s.toggle()
-        self.pad_s.setText("SAFE")
-        font = QtGui.QFont()
-        font.setFamily("Helvetica")
-        font.setPointSize(14)
-        self.pad_s.setFont(font)
-        self.pad_s.clicked.connect(lambda: self.pad_state_set(self.pad_s))
-        self.pad_s.setStyleSheet("QPushButton { background-color: grey; color: white; }")
+        # self.pad_s = QtWidgets.QPushButton(self.centralwidget)
+        # self.pad_s.setGeometry(QtCore.QRect(300, 710, 90, 55))
+        # self.pad_s.setCheckable(True)
+        # self.pad_s.toggle()
+        # self.pad_s.setText("SAFE")
+        # font = QtGui.QFont()
+        # font.setFamily("Helvetica")
+        # font.setPointSize(14)
+        # self.pad_s.setFont(font)
+        # self.pad_s.clicked.connect(lambda: self.pad_state_set(self.pad_s))
+        # self.pad_s.setStyleSheet("QPushButton { background-color: grey; color: white; }")
 
 
 
@@ -742,7 +782,18 @@ class Ui_MainWindow(object):
     
     def power_off_all(self): 
         s.send(b"stop\n")
-        
+    
+    def four11f(self): 
+        s.send(b"411f\n")
+    
+    def four11o(self): 
+        s.send(b"411o\n")
+
+    def three__six(self): 
+        s.send(b"36\n")
+
+    def three_five_one(self):
+        s.send(b"351\n")
     
     def valve_seq(self):
         s.send(b"seq\n")
@@ -1051,15 +1102,18 @@ class Ui_MainWindow(object):
         # self.date_label.setText(_translate("MainWindow", "TextLabel"))
 
         self.pwr_off.setText(_translate("MainWindow", "PWR OFF"))
-        self.start_valve_seq.setText(_translate("MainWindow","VALVE SEQ"))
+
+        self.three_six.setText(_translate("MainWindow","3.6"))
+        self.four_one_oneF.setText(_translate("MainWindow", "4.1.1f"))
+        self.four_one_oneO.setText(_translate("MainWindow", "4.1.1o"))
         # self.close_all.setText(_translate("MainWindow", "PWR OFF ALL"))
 
         
-        self.pad_s.setText(_translate("MainWinsow", "SAFE"))
+        #self.pad_s.setText(_translate("MainWinsow", "SAFE"))
 
-        self.stack_light_blue.setText(_translate("MainWindow", ""))
-        self.stack_light_green.setText(_translate("MainWindow", ""))
-        self.stack_light_yellow.setText(_translate("MainWindow", ""))
+        # self.stack_light_blue.setText(_translate("MainWindow", ""))
+        # self.stack_light_green.setText(_translate("MainWindow", ""))
+        # self.stack_light_yellow.setText(_translate("MainWindow", ""))
     
 
 
