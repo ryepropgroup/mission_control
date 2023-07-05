@@ -755,6 +755,7 @@ class Ui_MainWindow(object):
         try:
                 json_str = data
                 json_data = json.loads(json_str)
+
                 #print(json_data['lj'])
                 p1_val = json_data['lj']['p10val']
                 p2_val = json_data['lj']['p21val']
@@ -804,6 +805,25 @@ class Ui_MainWindow(object):
                     self.P10.setValue(int(p3_val))
                     self.T2_ETH_RUN.setValue(int(t2_thermo))
                     self.T3_N2O_run.setValue(int(t3_thermo))
+                    self.V10_SB_state.setText(self.translateState(str(v10_sb)))
+                    self.V11_S_NO_state.setText(self.translateState(str(v11_s)))
+                    self.V12_S_state.setText(self.translateState(str(v12_s)))
+                    
+
+                    self.V20_SB_state.setText(self.translateState(str(v20_sb)))
+                    self.V21_MB_state.setText(self.translateState(str(v21_sb)))
+                    self.V22_SB_NO_state.setText(self.translateState(str(v22_sb)))
+                    self.V23_SB_state.setText(self.translateState(str(v23_sb)))
+
+                    self.V30_SB_state.setText(self.translateState(str(v30_sb)))
+                    self.V31_MB_state.setText(self.translateState(str(v31_sb)))
+                    self.V32_S_state.setText(self.translateState(str(v32_s)))
+                    self.V33_SB_NO_state.setText(self.translateState(str(v33_sb)))
+                    self.V34_S_state.setText(self.translateState(str(v34_s)))
+                    self.V35_SB_NO_state.setText(self.translateState(str(v35_sb)))
+                    self.V36_S_state.setText(self.translateState(str(v36_s)))
+                    self.V37_SB_state.setText(self.translateState(str(v37_sb)))
+                    self.V38_S_state.setText(self.translateState(str(v38_s)))
                 except ValueError as valueError:
                     pass
                 #print(json_data)
@@ -853,25 +873,7 @@ class Ui_MainWindow(object):
                 
                 
                 #set valve state
-                # self.V10_SB_state.setText(self.translateState(str(v10_sb)))
-                # self.V11_S_NO_state.setText(self.translateState(str(v11_s)))
-                # self.V12_S_state.setText(self.translateState(str(v12_s)))
                 
-
-                # self.V20_SB_state.setText(self.translateState(str(v20_sb)))
-                # self.V21_MB_state.setText(self.translateState(str(v21_sb)))
-                # self.V22_SB_NO_state.setText(self.translateState(str(v22_sb)))
-                # self.V23_SB_state.setText(self.translateState(str(v23_sb)))
-
-                # self.V30_SB_state.setText(self.translateState(str(v30_sb)))
-                # self.V31_MB_state.setText(self.translateState(str(v31_sb)))
-                # self.V32_S_state.setText(self.translateState(str(v32_s)))
-                # self.V33_SB_NO_state.setText(self.translateState(str(v33_sb)))
-                # self.V34_S_state.setText(self.translateState(str(v34_s)))
-                # self.V35_SB_NO_state.setText(self.translateState(str(v35_sb)))
-                # self.V36_S_state.setText(self.translateState(str(v36_s)))
-                # self.V37_SB_state.setText(self.translateState(str(v37_sb)))
-                # self.V38_S_state.setText(self.translateState(str(v38_s)))
 
                 t2_thermo = json_data['lj']['t2val']
                 t3_thermo = json_data['lj']['t3val']
