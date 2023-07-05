@@ -765,24 +765,24 @@ class Ui_MainWindow(object):
                 t3_thermo = json_data['lj']['t3val']
 
 
-                v11_s  = json_data['valves']['V11']
+                v11_s  = json_data['valves']['V11_NO']
                 v10_sb = json_data['valves']['V10']
-                v12_s  = json_data['valves']['V12']
+                v12_s  = json_data['valves']['V12_NO']
 
                 v20_sb = json_data['valves']['V20']
                 v21_sb = json_data['valves']['V21']
-                v22_sb = json_data['valves']['V22']
-                v23_sb = json_data['valves']['V23']
+                v22_sb = json_data['valves']['V22_NO']
+                v23_sb = json_data['valves']['V23_NO']
 
                 v30_sb = json_data['valves']['V30']
                 v31_sb = json_data['valves']['V31']
                 v32_s  = json_data['valves']['V32']
-                v33_sb = json_data['valves']['V33']
+                v33_sb = json_data['valves']['V33_NO']
                 v34_s  = json_data['valves']['V34']
-                v35_sb = json_data['valves']['V35']
+                v35_sb = json_data['valves']['V35_NO']
                 v36_s  = json_data['valves']['V36']
                 v37_sb = json_data['valves']['V37']
-                v38_s  = json_data['valves']['V38']
+                v38_s  = json_data['valves']['V38_NO']
 
 
                 
