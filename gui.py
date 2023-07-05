@@ -781,7 +781,7 @@ class Ui_MainWindow(object):
     
     
     def power_off_all(self): 
-        s.send(b"off\n")
+        s.send(b"stop\n")
     
     def cavv(self): 
         s.send(b"cavv\n")
