@@ -256,6 +256,7 @@ class Ui_MainWindow(object):
         self.V11_S_NO_open.clicked.connect(lambda: self.open_valve(b"V11_NO_open\n"))
         self.V11_S_NO_close = QtWidgets.QPushButton(self.centralwidget)
         self.V11_S_NO_close.setGeometry(QtCore.QRect(218, 512, 71, 21))
+
         font = QtGui.QFont()
         font.setFamily("Helvetica")
         self.V11_S_NO_close.setFont(font)
@@ -849,24 +850,24 @@ class Ui_MainWindow(object):
                 # # p31_val = json_data['lj']['p31val']
                 # # p32_val = json_data['lj']['p32val']
 
-                v11_s  = json_data['valves']['V11_S']
-                v10_sb = json_data['valves']['V10_SB']
-                v12_s  = json_data['valves']['V12_S']
+                v11_s  = json_data['valves']['V11']
+                v10_sb = json_data['valves']['V10']
+                v12_s  = json_data['valves']['V12']
 
-                v20_sb = json_data['valves']['V20_SB']
-                v21_sb = json_data['valves']['V21_SB']
-                v22_sb = json_data['valves']['V22_SB']
-                v23_sb = json_data['valves']['V23_SB']
+                v20_sb = json_data['valves']['V20']
+                v21_sb = json_data['valves']['V21']
+                v22_sb = json_data['valves']['V22']
+                v23_sb = json_data['valves']['V23']
 
-                v30_sb = json_data['valves']['V30_SB']
-                v31_sb = json_data['valves']['V31_SB']
-                v32_s  = json_data['valves']['V32_S']
-                v33_sb = json_data['valves']['V33_SB']
-                v34_s  = json_data['valves']['V34_S']
-                v35_sb = json_data['valves']['V35_SB']
-                v36_s  = json_data['valves']['V36_S']
-                v37_sb = json_data['valves']['V37_SB']
-                v38_s  = json_data['valves']['V38_S']
+                v30_sb = json_data['valves']['V30']
+                v31_sb = json_data['valves']['V31']
+                v32_s  = json_data['valves']['V32']
+                v33_sb = json_data['valves']['V33']
+                v34_s  = json_data['valves']['V34']
+                v35_sb = json_data['valves']['V35']
+                v36_s  = json_data['valves']['V36']
+                v37_sb = json_data['valves']['V37']
+                v38_s  = json_data['valves']['V38']
                 
                 #set valve state
                 self.V10_SB_state.setText(self.translateState(str(v10_sb)))
