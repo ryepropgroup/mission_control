@@ -763,6 +763,27 @@ class Ui_MainWindow(object):
                 t2_thermo = json_data['lj']['t2val']
                 t3_thermo = json_data['lj']['t3val']
 
+
+                v11_s  = json_data['valves']['V11_S']
+                v10_sb = json_data['valves']['V10_SB']
+                v12_s  = json_data['valves']['V12_S']
+
+                v20_sb = json_data['valves']['V20_SB']
+                v21_sb = json_data['valves']['V21_SB']
+                v22_sb = json_data['valves']['V22_SB']
+                v23_sb = json_data['valves']['V23_SB']
+
+                v30_sb = json_data['valves']['V30_SB']
+                v31_sb = json_data['valves']['V31_SB']
+                v32_s  = json_data['valves']['V32_S']
+                v33_sb = json_data['valves']['V33_SB']
+                v34_s  = json_data['valves']['V34_S']
+                v35_sb = json_data['valves']['V35_SB']
+                v36_s  = json_data['valves']['V36_S']
+                v37_sb = json_data['valves']['V37_SB']
+                v38_s  = json_data['valves']['V38_S']
+
+
                 
   
                
@@ -846,7 +867,27 @@ class Ui_MainWindow(object):
                 v36_s  = json_data['valves']['V36_S']
                 v37_sb = json_data['valves']['V37_SB']
                 v38_s  = json_data['valves']['V38_S']
+                
+                #set valve state
+                self.V10_SB_state.setText(self.translateState(str(v10_sb)))
+                self.V11_S_NO_state.setText(self.translateState(str(v11_s)))
+                self.V12_S_state.setText(self.translateState(str(v12_s)))
+                
 
+                self.V20_SB_state.setText(self.translateState(str(v20_sb)))
+                self.V21_MB_state.setText(self.translateState(str(v21_sb)))
+                self.V22_SB_NO_state.setText(self.translateState(str(v22_sb)))
+                self.V23_SB_state.setText(self.translateState(str(v23_sb)))
+
+                self.V30_SB_state.setText(self.translateState(str(v30_sb)))
+                self.V31_MB_state.setText(self.translateState(str(v31_sb)))
+                self.V32_S_state.setText(self.translateState(str(v32_s)))
+                self.V33_SB_NO_state.setText(self.translateState(str(v33_sb)))
+                self.V34_S_state.setText(self.translateState(str(v34_s)))
+                self.V35_SB_NO_state.setText(self.translateState(str(v35_sb)))
+                self.V36_S_state.setText(self.translateState(str(v36_s)))
+                self.V37_SB_state.setText(self.translateState(str(v37_sb)))
+                self.V38_S_state.setText(self.translateState(str(v38_s)))
 
                 t2_thermo = json_data['lj']['t2val']
                 t3_thermo = json_data['lj']['t3val']
@@ -876,26 +917,7 @@ class Ui_MainWindow(object):
                 
                 
 
-                #set valve state
-                self.V10_SB_state.setText(self.translateState(str(v10_sb)))
-                self.V11_S_NO_state.setText(self.translateState(str(v11_s)))
-                self.V12_S_state.setText(self.translateState(str(v12_s)))
                 
-
-                self.V20_SB_state.setText(self.translateState(str(v20_sb)))
-                self.V21_MB_state.setText(self.translateState(str(v21_sb)))
-                self.V22_SB_NO_state.setText(self.translateState(str(v22_sb)))
-                self.V23_SB_state.setText(self.translateState(str(v23_sb)))
-
-                self.V30_SB_state.setText(self.translateState(str(v30_sb)))
-                self.V31_MB_state.setText(self.translateState(str(v31_sb)))
-                self.V32_S_state.setText(self.translateState(str(v32_s)))
-                self.V33_SB_NO_state.setText(self.translateState(str(v33_sb)))
-                self.V34_S_state.setText(self.translateState(str(v34_s)))
-                self.V35_SB_NO_state.setText(self.translateState(str(v35_sb)))
-                self.V36_S_state.setText(self.translateState(str(v36_s)))
-                self.V37_SB_state.setText(self.translateState(str(v37_sb)))
-                self.V38_S_state.setText(self.translateState(str(v38_s)))
 
 
                 
