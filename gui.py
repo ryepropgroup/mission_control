@@ -786,16 +786,19 @@ class Ui_MainWindow(object):
                 v38_s  = json_data['valves']['V38_NO']
 
 
+
+                if self.translateStateButtons(v10_sb) == True: 
+                    self.V10_SB_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                elif self.translateStateButtons(v10_sb) == False: 
+                    self.V10_SB_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                    
+
+
                 
   
                
                 
-                # self.T2_ETH_RUN.setValue(str(t2_thermo))
-                # self.T3_N2O_run.setValue(str())
-
-                #self.P21.setValue(int(p1_val))
-             
-        #         self.P31.setValue(int(p1_val))
+                
                 
         
 
@@ -805,6 +808,8 @@ class Ui_MainWindow(object):
                     self.P10.setValue(int(p3_val))
                     self.T2_ETH_RUN.setValue(int(t2_thermo))
                     self.T3_N2O_run.setValue(int(t3_thermo))
+
+
                     self.V10_SB_state.setText(self.translateState(str(v10_sb)))
                     self.V11_S_NO_state.setText(self.translateState(str(v11_s)))
                     self.V12_S_state.setText(self.translateState(str(v12_s)))
@@ -825,6 +830,7 @@ class Ui_MainWindow(object):
                     self.V37_SB_state.setText(self.translateState(str(v37_sb)))
                     self.V38_S_state.setText(self.translateState(str(v38_s)))
                 except ValueError as valueError:
+
                     pass
                 #print(json_data)
         except json.JSONDecodeError as e:
@@ -926,6 +932,16 @@ class Ui_MainWindow(object):
         elif string == "True": 
             field = "Open"
             return(field)
+    
+    def translateStateButtons(self, string): 
+        if string == "False": 
+            state = False
+            return state
+        elif string == "True": 
+            state = True
+            return state
+
+            
 
 
     def connect(self): 
