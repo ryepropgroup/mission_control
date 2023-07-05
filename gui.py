@@ -757,7 +757,7 @@ class Ui_MainWindow(object):
                 #print(json_data['lj'])
                 p1_val = json_data['lj']['p10val']
                 p2_val = json_data['lj']['p21val']
-                p3_val = json_data['lj']['p30val']
+                p3_val = json_data['lj']['p31val']
                 
 
                 t2_thermo = json_data['lj']['t2val']
