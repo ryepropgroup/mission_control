@@ -785,6 +785,7 @@ class Ui_MainWindow(object):
                 v37_sb = json_data['valves']['V37']
                 v38_s  = json_data['valves']['V38_NO']
 
+                print(self.translateStateButtons(v10_sb))
 
 
                 if self.translateStateButtons(v10_sb) == True: 
@@ -859,71 +860,7 @@ class Ui_MainWindow(object):
         
         
 
-    def update_valve_state(self): 
-       
-        while True:
-            try:
-                json_str = self.receive_until_newline()
-                json_data = json.loads(json_str)
-                # p10_val = json_data['lj']['p10val']
-
-                # #p20_val = json_data['lj']['p20val']
-                # p21_val = json_data['lj']['p21val']
-                # # p22_val = json_data['lj']['p22val']
-
-
-                # p30_val = json_data['lj']['p30val']
-                # # p31_val = json_data['lj']['p31val']
-                # # p32_val = json_data['lj']['p32val']
-
-                
-                
-                #set valve state
-                
-
-                t2_thermo = json_data['lj']['t2val']
-                t3_thermo = json_data['lj']['t3val']
-
-
-                print(json_data)
-
-                
-                #updating the pressure gauges
-                # self.P10.setValue(int(p10_val))
-
-                # # self.P20.setValue(int(p20_val))
-                # self.P21.setValue(int(p21_val))
-                # # self.P22.setValue(int(p22_val))
-
-                # self.P30.setValue(int(p30_val))
-                # # self.P31.setValue(int(p31_val))
-                # self.P32.setValue(int(p32_val))
-
-
-                #update thermocouples
-               
-                
-
-
-                
-                
-                
-
-                
-
-
-                
-
-                valves = json_data['valves']
-                # print("P10 Value:", p10_val)
-                # print("P20 Value:", p20_val)
-                # print("")
-
-                # print("P3 Value:", p3_val)
-                # print("Valves:", valves)
-
-            except json.JSONDecodeError:
-                pass
+  
                 
     def translateState(self, string):
         if string == "False": 
@@ -963,10 +900,12 @@ class Ui_MainWindow(object):
     #        sys.exit(1)
 
     def open_valve(self,name): 
-        s.send(name)
+        #s.send(name)
+        print("open")
   
     def close_valve(self,name): 
-        s.send(name)
+       # s.send(name)
+        print("close")
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
