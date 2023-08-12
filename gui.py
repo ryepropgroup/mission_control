@@ -40,10 +40,32 @@ PORT = 6969
 
 
 
+
+
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
 from PyQt5.QtCore import Qt, QRect, QBasicTimer, QPoint , QThread, pyqtSignal
 from PyQt5.QtGui import QPainter, QPen, QFont, QColor, QPolygon
+
+
+
+    
+
+class ButtonThread(QThread): 
+    openv = pyqtSignal(object)
+    closev = pyqtSignal(object)
+
+    def __init__(self):
+        QThread.__init__(self)
+
+    
+    def b_open(self, name): 
+        s.send(name)
+        print("opened")
+    
+    def b_close(self, name): 
+        s.send(name)
+        print("closed")
 
 
 class WorkerThread(QThread):
@@ -76,7 +98,12 @@ class WorkerThread(QThread):
 class Ui_MainWindow(object):
     #pwr off all buttoin 
     #valve seq
+
+    open_signal = pyqtSignal(object)
+    close_signal = pyqtSignal(object)
+
     def __init__(self, MainWindow):
+       
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1440, 872)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -809,6 +836,7 @@ class Ui_MainWindow(object):
         try:
                 json_str = data
                 json_data = json.loads(json_str)
+                print(json_data)
 
                 #print(json_data['lj'])
                 p1_val = json_data['lj']['p10val']
@@ -995,9 +1023,9 @@ class Ui_MainWindow(object):
 
 
                 try:
-                    self.P31.setValue(int(p1_val))
+                    self.P31.setValue(int(p3_val))
                     self.P21.setValue(int(p2_val))
-                    self.P10.setValue(int(p3_val))
+                    self.P10.setValue(int(p1_val))
                     self.T2_ETH_RUN.setValue(int(t2_thermo))
                     self.T3_N2O_run.setValue(int(t3_thermo))
 
@@ -1076,27 +1104,47 @@ class Ui_MainWindow(object):
         global s 
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #tcp socket
 
+        global last_cmd
+        last_cmd = "nothing"
+
         try: 
+
+            #169.254.26.176
+            #127.0.0.1
+            #10.42.0.1
+
             s.connect(("127.0.0.1", PORT)) #connect to mini server
             print("connected")
             self.thread = WorkerThread()         #make instance of working class
-            self.thread.json_data_rec.connect(self.on_data_ready)        #tie func to working class
+            self.thread.json_data_rec.connect(self.on_data_ready)  #tie func to working class
             self.thread.start()                                    #start thread
-            print('thread started')
+            print("button thread started")
+
+
+            self.b_thread = ButtonThread()
+            self.b_thread.start()
+            self.open_signal.connect(self.b_thread.b_open)
+            self.close_signal.connect(self.b_thread.b_close)
+            print("button thread stared")
 
         except Exception as e  : 
             print(str(e))
             print("ERR MSG: If connection is refused, either port or socket is wrong")
-    #        s.close()
-    #        sys.exit(1)
+            s.close()
+            sys.exit(1)
 
     def open_valve(self,name): 
-        s.send(name)
-        print("open")
+
+        #emit signal 
+        self.open_signal.emit(name)
+
+        # s.send(name)
+        # print("open")
   
     def close_valve(self,name): 
-        s.send(name)
-        print("close")
+        self.close_signal.emit(name)
+        # s.send(name)
+        # print("close")
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -1193,6 +1241,8 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     import sys
+
+    
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow(MainWindow)
