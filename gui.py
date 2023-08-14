@@ -54,8 +54,11 @@ from PyQt5.QtGui import QPainter, QPen, QFont, QColor, QPolygon
     
 
 class ButtonThread(QThread): 
-    openv = pyqtSignal(object)
-    closev = pyqtSignal(object)
+    open_signal = pyqtSignal(object)
+    close_signal = pyqtSignal(object)
+    four11f_signal = pyqtSignal(object)
+    four11o_signal = pyqtSignal(object)
+    three__six_signal = pyqtSignal(object)
 
     def __init__(self):
         QThread.__init__(self)
@@ -1051,11 +1054,8 @@ class Ui_MainWindow(object):
 
             self.b_thread = ButtonThread()
             self.b_thread.start()
-            self.open_signal.connect(self.b_thread.b_open)
-            self.close_signal.connect(self.b_thread.b_close)
-            self.four11f_signal.connect(self.b_thread.b_411f)
-            self.four11o_signal.connect(self.b_thread.b_411o)
-            self.three__six_signal.connect(self.b_thread.b_366)
+            self.b_thread.open_signal.connect(self.b_thread.b_open)
+       
 
             print("button thread stared")
 
