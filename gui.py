@@ -67,6 +67,17 @@ class ButtonThread(QThread):
         s.send(name)
         print("closed")
 
+    def b_411f(self): 
+        s.send(b"411f\n")
+        print("sequence 4.1.1 f")
+
+    def b_411o(self): 
+        s.send(b"411o\n")
+        print("sequence 4.1.1 o")
+
+   
+    
+
 
 class WorkerThread(QThread):
     json_data_rec = pyqtSignal(object)
@@ -101,6 +112,9 @@ class Ui_MainWindow(object):
 
     open_signal = pyqtSignal(object)
     close_signal = pyqtSignal(object)
+    four11f_signal = pyqtSignal(object)
+    four11o_signal = pyqtSignal(object)
+    three__six_signal = pyqtSignal(object)
 
     def __init__(self, MainWindow):
        
@@ -183,95 +197,6 @@ class Ui_MainWindow(object):
         self.three_six.setText("3.6")
         self.three_six.setStyleSheet("QPushButton { background-color: #ffcc5c; color: white; }" "QPushButton:pressed { background-color: #ffeead; }")
         self.three_six.clicked.connect(self.three_five_one)
-
-
-        # self.stack_light_blue = QtWidgets.QPushButton(self.centralwidget)
-        # self.stack_light_blue.setGeometry(QtCore.QRect(30, 745, 70, 55))
-        # font = QtGui.QFont()
-        # font.setFamily("Helvetica")
-        # font.setPointSize(18)
-        # self.stack_light_blue.setFont(font)
-        # self.stack_light_blue.setObjectName("blue")
-        # self.stack_light_blue.setStyleSheet("QPushButton { background-color: blue; color: white; }")
-
-        
-    
-        # #self.stack_light_blue.clicked.connect(self.power_off_all)
-
-
-        # self.stack_light_green = QtWidgets.QPushButton(self.centralwidget)
-        # self.stack_light_green.setGeometry(QtCore.QRect(120, 745, 70, 55))
-        # font = QtGui.QFont()
-        # font.setFamily("Helvetica")
-        # font.setPointSize(18)
-        # self.stack_light_green.setFont(font)
-        # self.stack_light_green.setObjectName("GREEM")
-        # self.stack_light_green.setStyleSheet("QPushButton { background-color: #05c817; color: white; }")
-        # #self.stack_light_blue.clicked.connect(self.power_off_all)
-
-
-        # self.stack_light_yellow = QtWidgets.QPushButton(self.centralwidget)
-        # self.stack_light_yellow.setGeometry(QtCore.QRect(30, 679, 70, 55))
-        # font = QtGui.QFont()
-        # font.setFamily("Helvetica")
-        # font.setPointSize(18)
-        # self.stack_light_yellow.setFont(font)
-        # self.stack_light_yellow.setObjectName("yeellers")
-        # self.stack_light_yellow.setStyleSheet("QPushButton { background-color: #9e5e10; color: white; }")
-        # #self.stack_light_blue.clicked.connect(self.power_off_all)
-
-
-        # self.stack_light_red = QtWidgets.QPushButton(self.centralwidget)
-        # self.stack_light_red.setGeometry(QtCore.QRect(120, 679, 70, 55))
-        # font = QtGui.QFont()
-        # font.setFamily("Helvetica")
-        # font.setPointSize(18)
-        # self.stack_light_red.setFont(font)
-        # self.stack_light_red.setObjectName("reddeadredemption")
-        # self.stack_light_red.setStyleSheet("QPushButton { background-color: #ad1d1d; color: white; }" )
-        # #self.stack_light_blue.clicked.connect(self.power_off_all)
-
-
-        
-
-        
-        
-        # self.pad_s = QtWidgets.QPushButton(self.centralwidget)
-        # self.pad_s.setGeometry(QtCore.QRect(300, 710, 90, 55))
-        # self.pad_s.setCheckable(True)
-        # self.pad_s.toggle()
-        # self.pad_s.setText("SAFE")
-        # font = QtGui.QFont()
-        # font.setFamily("Helvetica")
-        # font.setPointSize(14)
-        # self.pad_s.setFont(font)
-        # self.pad_s.clicked.connect(lambda: self.pad_state_set(self.pad_s))
-        # self.pad_s.setStyleSheet("QPushButton { background-color: grey; color: white; }")
-
-
-
-       
-
-        
-
-
-            
-      
-       
-        # self.close_all = QtWidgets.QPushButton(self.centralwidget)
-        # self.close_all.setGeometry(QtCore.QRect(400, 200, 90, 55))
-        # font = QtGui.QFont()
-        # font.setFamily("Helvetica")
-        # font.setPointSize(10)
-        # self.close_all.setFont(font)
-        # self.close_all.setObjectName("time_label")
-        # self.close_all.setStyleSheet("QPushButton { background-color: #ffcc5c; color: white; }" "QPushButton:pressed { background-color: #ffeead; }")
-        # self.close_all.clicked.connect(self.open_all_valves)
-
-
-
-
-        
 
 
         #Valve 10 sb open, close, and state
@@ -814,13 +739,14 @@ class Ui_MainWindow(object):
         s.send(b"cavv\n")
     
     def four11f(self): 
-        s.send(b"411f\n")
-    
+        self.four11f_signal.emit()
+
     def four11o(self): 
-        s.send(b"411o\n")
+       # s.send(b"411o\n")
+       self.four11o_signal.emit()
 
     def three__six(self): 
-        s.send(b"36\n")
+        pass
 
     def three_five_one(self):
         s.send(b"351\n")
@@ -1125,13 +1051,17 @@ class Ui_MainWindow(object):
             self.b_thread.start()
             self.open_signal.connect(self.b_thread.b_open)
             self.close_signal.connect(self.b_thread.b_close)
+            self.four11f_signal.connect(self.b_thread.b_411f)
+            self.four11o_signal.connect(self.b_thread.b_411o)
+            self.three__six_signal.connect(self.b_thread.b_366)
+
             print("button thread stared")
 
         except Exception as e  : 
             print(str(e))
             print("ERR MSG: If connection is refused, either port or socket is wrong")
-            s.close()
-            sys.exit(1)
+            # s.close()
+            # sys.exit(1)
 
     def open_valve(self,name): 
 
