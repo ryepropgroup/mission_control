@@ -11,6 +11,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import QTime, QTimer, QDate, Qt
+from PyQt5.QtCore import QObject, pyqtSignal
+
 
 #from linearGauge file to add linear gauge custom widgets
 from updated_gauge import LinearGauge
