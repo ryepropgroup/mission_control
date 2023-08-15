@@ -91,7 +91,7 @@ class WorkerThread(QThread):
             self.json_data_rec.emit(json_data)
         
 
-class Ui_MainWindow(QMainWindow):
+class Ui_MainWindow(object):
     #pwr off all buttoin 
     #valve seq
 
@@ -169,6 +169,7 @@ class Ui_MainWindow(QMainWindow):
         self.four_one_oneF.setStyleSheet("QPushButton { background-color: orange; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
         self.four_one_oneF.setText("4.1.1f")
         self.four_one_oneF.clicked.connect(self.four11f)
+        self.four_one_oneF.clicked.connect(lambda: self.four11f(b"411f\n"))
 
         self.four_one_oneO = QtWidgets.QPushButton(self.centralwidget)
         self.four_one_oneO.setGeometry(QtCore.QRect(120, 700, 90, 55))
@@ -179,7 +180,8 @@ class Ui_MainWindow(QMainWindow):
         self.four_one_oneO.setObjectName("411")
         self.four_one_oneO.setStyleSheet("QPushButton { background-color: #7120FF; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
         self.four_one_oneO.setText("4.1.1o")
-        self.four_one_oneO.clicked.connect(self.four11o)
+        self.four_one_oneO.clicked.connect(lambda: self.four11o(b"411o\n"))
+       
         
         
 
@@ -752,12 +754,12 @@ class Ui_MainWindow(QMainWindow):
     def cavv(self): 
         s.send(b"cavv\n")
 
-    def four11f(self): 
-        self.four11f_signal.emit()
-        #s.send(b"411f\n")
+    def four11f(self,name): 
+        
+        s.send(name)
 
-    def four11o(self): 
-       s.send(b"411o\n")
+    def four11o(self,name): 
+       s.send(name)
        #self.four11o_signal.emit()
 
     def three__six(self): 
@@ -1058,7 +1060,6 @@ class Ui_MainWindow(QMainWindow):
             print("connected")
             self.thread = WorkerThread()         #make instance of working class
             self.thread.json_data_rec.connect(self.on_data_ready)  #tie func to working class
-            self.four11f_signal.connect(self.thread.worker_four11f)
             
             self.thread.start()                                    #start thread
             print("worker thread started")
