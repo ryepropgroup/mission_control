@@ -49,47 +49,24 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
 from PyQt5.QtCore import Qt, QRect, QBasicTimer, QPoint , QThread, pyqtSignal
 from PyQt5.QtGui import QPainter, QPen, QFont, QColor, QPolygon
 
-
-
-    
-
-class ButtonThread(QThread): 
+class WorkerThread(QThread):
+    json_data_rec = pyqtSignal(object)
     open_signal = pyqtSignal(object)
     close_signal = pyqtSignal(object)
     four11f_signal = pyqtSignal(object)
     four11o_signal = pyqtSignal(object)
     three__six_signal = pyqtSignal(object)
 
-    def __init__(self):
-        QThread.__init__(self)
-
-    
-    def b_open(self, name): 
-        s.send(name)
-        print("opened")
-    
-    def b_close(self, name): 
-        s.send(name)
-        print("closed")
-
-    def b_411f(self): 
-        s.send(b"411f\n")
-        print("sequence 4.1.1 f")
-
-    def b_411o(self): 
-        s.send(b"411o\n")
-        print("sequence 4.1.1 o")
-
-   
-    
-
-
-class WorkerThread(QThread):
-    json_data_rec = pyqtSignal(object)
 
     def __init__(self):
         QThread.__init__(self)
 
+    def open_valve(self,name): 
+
+        #emit signal 
+        #self.open_signal.emit(name)
+        s.send(name)
+        print("open")
     
     def run(self):
         
@@ -115,11 +92,11 @@ class Ui_MainWindow(object):
     #pwr off all buttoin 
     #valve seq
 
-    open_signal = pyqtSignal(object)
-    close_signal = pyqtSignal(object)
-    four11f_signal = pyqtSignal(object)
-    four11o_signal = pyqtSignal(object)
-    three__six_signal = pyqtSignal(object)
+    # open_signal = pyqtSignal(object)
+    # close_signal = pyqtSignal(object)
+    # four11f_signal = pyqtSignal(object)
+    # four11o_signal = pyqtSignal(object)
+    # three__six_signal = pyqtSignal(object)
 
     def __init__(self, MainWindow):
        
@@ -1046,13 +1023,20 @@ class Ui_MainWindow(object):
 
             s.connect(("127.0.0.1", PORT)) #connect to mini server
             print("connected")
-            self.thread = WorkerThread()         #make instance of working class
+            global thread 
+            thread = WorkerThread()         #make instance of working class
             self.thread.json_data_rec.connect(self.on_data_ready)  #tie func to working class
+            self.thread.open_signal.connect(self.open_valve)       #tie open signal 
+            self.thread.close_signal.connect(self.close_valve)     #tie close signal 
+
+            
+
+
             self.thread.start()                                    #start thread
             print("button thread started")
 
 
-            self.b_thread = ButtonThread()
+            #self.b_thread = ButtonThread()
             self.b_thread.start()
             self.b_thread.open_signal.connect(self.b_thread.b_open)
        
@@ -1067,16 +1051,14 @@ class Ui_MainWindow(object):
 
     def open_valve(self,name): 
 
-        #emit signal 
-        self.open_signal.emit(name)
-
+        thread.open_signal.emit(name)
         # s.send(name)
         # print("open")
   
     def close_valve(self,name): 
-        self.close_signal.emit(name)
-        # s.send(name)
-        # print("close")
+        #self.close_signal.emit(name)
+        s.send(name)
+        print("close")
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
