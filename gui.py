@@ -91,7 +91,7 @@ class WorkerThread(QThread):
             self.json_data_rec.emit(json_data)
         
 
-class Ui_MainWindow(object):
+class Ui_MainWindow(QMainWindow):
     #pwr off all buttoin 
     #valve seq
 
@@ -739,9 +739,11 @@ class Ui_MainWindow(object):
 
     
     def startIO(self): 
+        print("file write started")
         s.send(b"wstart\n")
 
     def stopIO(self): 
+        print("file write stopped")
         s.send(b"wstop\n")
     
     def power_off_all(self): 
@@ -751,7 +753,8 @@ class Ui_MainWindow(object):
         s.send(b"cavv\n")
 
     def four11f(self): 
-        s.send(b"411f\n")
+        self.four11f_signal.emit()
+        #s.send(b"411f\n")
 
     def four11o(self): 
        s.send(b"411o\n")
@@ -1055,6 +1058,8 @@ class Ui_MainWindow(object):
             print("connected")
             self.thread = WorkerThread()         #make instance of working class
             self.thread.json_data_rec.connect(self.on_data_ready)  #tie func to working class
+            self.four11f_signal.connect(self.thread.worker_four11f)
+            
             self.thread.start()                                    #start thread
             print("worker thread started")
 
