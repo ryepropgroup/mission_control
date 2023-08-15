@@ -65,8 +65,8 @@ class WorkerThread(QThread):
 
         #emit signal 
         #self.open_signal.emit(name)
-        s.send(name)
-        print("open")
+        self.open_signal.emit(name)
+        
     
     def run(self):
         
@@ -189,7 +189,8 @@ class Ui_MainWindow(object):
         self.V10_SB_open.setFont(font)
         self.V10_SB_open.setObjectName("V10_SB_open")
         self.V10_SB_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }" "QPushButton:pressed { background-color: #074d05; }")
-        self.V10_SB_open.clicked.connect(lambda: self.open_valve(b"V10_open\n"))
+        self.V10_SB_open.clicked.connect(lambda: thread.open_valve(b"V10_open\n"))
+       #self.V10_SB_open.clicked.connect(lambda: self.open_valve(b"V10_open\n"))
 
         self.V10_SB_close = QtWidgets.QPushButton(self.centralwidget)
         self.V10_SB_close.setGeometry(QtCore.QRect(344, 310, 71, 21))
@@ -1012,8 +1013,8 @@ class Ui_MainWindow(object):
         global s 
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #tcp socket
 
-        global last_cmd
-        last_cmd = "nothing"
+        # global last_cmd
+        # last_cmd = "nothing"
 
         try: 
 
@@ -1051,9 +1052,9 @@ class Ui_MainWindow(object):
 
     def open_valve(self,name): 
 
-        thread.open_signal.emit(name)
-        # s.send(name)
-        # print("open")
+        #thread.open_signal.emit(name)
+        s.send(name)
+        print("open")
   
     def close_valve(self,name): 
         #self.close_signal.emit(name)
