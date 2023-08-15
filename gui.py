@@ -19,6 +19,9 @@ from updated_gauge import LinearGauge
 from p10_gauge import P10_Gauge
 from p21_22_31_32_gauge import P21_P22_P31_P32
 
+
+from engine_p20_p30_gauge import engineP20_30
+
 from verticaltempgauge import VerticalTempLinearGauge
 from functools import partial
 
@@ -139,7 +142,7 @@ class Ui_MainWindow(object):
         self.stop_io.setObjectName("stop_io")
         self.stop_io.setStyleSheet("QPushButton { background-color: #983b5a; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
         self.stop_io.setText("STOP IO")
-        self.stop_io.clicked.connect(self.startIO)
+        self.stop_io.clicked.connect(self.stopIO)
 
 
         #120, 600, 90, 55
@@ -660,7 +663,7 @@ class Ui_MainWindow(object):
 
 
 
-        self.P20 = LinearGauge(self.centralwidget)
+        self.P20 = engineP20_30(self.centralwidget)
         self.P20.setGeometry(QtCore.QRect(1270, 195, 100, 60))
         self.P20.setObjectName("P20")
 
@@ -675,7 +678,7 @@ class Ui_MainWindow(object):
       
         
 
-        self.P30 = LinearGauge(self.centralwidget)
+        self.P30 = engineP20_30(self.centralwidget)
         self.P30.setGeometry(QtCore.QRect(1288, 498, 100, 60))
         self.P30.setObjectName("P30")
 
