@@ -50,6 +50,7 @@ from PyQt5.QtCore import Qt, QRect, QBasicTimer, QPoint , QThread, pyqtSignal
 from PyQt5.QtGui import QPainter, QPen, QFont, QColor, QPolygon
 
 class WorkerThread(QThread):
+
     json_data_rec = pyqtSignal(object)
     open_signal = pyqtSignal(object)
     close_signal = pyqtSignal(object)
@@ -60,12 +61,10 @@ class WorkerThread(QThread):
 
     def __init__(self):
         QThread.__init__(self)
+        
+    def worker_four11f(self): 
 
-    def open_valve(self,name): 
-
-        #emit signal 
-        #self.open_signal.emit(name)
-        self.open_signal.emit(name)
+        print("worker success")
         
     
     def run(self):
@@ -86,7 +85,7 @@ class WorkerThread(QThread):
             #trunicate
             json_data = data[:index].strip()
             self.json_data_rec.emit(json_data)
-            
+        
 
 class Ui_MainWindow(object):
     #pwr off all buttoin 
@@ -94,8 +93,8 @@ class Ui_MainWindow(object):
 
     # open_signal = pyqtSignal(object)
     # close_signal = pyqtSignal(object)
-    # four11f_signal = pyqtSignal(object)
-    # four11o_signal = pyqtSignal(object)
+    four11f_signal = pyqtSignal(object)
+    our11o_signal = pyqtSignal(object)
     # three__six_signal = pyqtSignal(object)
 
     def __init__(self, MainWindow):
@@ -142,7 +141,7 @@ class Ui_MainWindow(object):
         self.four_one_oneF.setObjectName("411")
         self.four_one_oneF.setStyleSheet("QPushButton { background-color: orange; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
         self.four_one_oneF.setText("4.1.1f")
-        self.four_one_oneF.clicked.connect(self.four11f)
+        self.four_one_oneF.clicked.connect(thread.worker_four11f)
 
         self.four_one_oneO = QtWidgets.QPushButton(self.centralwidget)
         self.four_one_oneO.setGeometry(QtCore.QRect(120, 700, 90, 55))
@@ -189,8 +188,7 @@ class Ui_MainWindow(object):
         self.V10_SB_open.setFont(font)
         self.V10_SB_open.setObjectName("V10_SB_open")
         self.V10_SB_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }" "QPushButton:pressed { background-color: #074d05; }")
-        self.V10_SB_open.clicked.connect(lambda: thread.open_valve(b"V10_open\n"))
-       #self.V10_SB_open.clicked.connect(lambda: self.open_valve(b"V10_open\n"))
+        self.V10_SB_open.clicked.connect(lambda: self.open_valve(b"V10_open\n"))
 
         self.V10_SB_close = QtWidgets.QPushButton(self.centralwidget)
         self.V10_SB_close.setGeometry(QtCore.QRect(344, 310, 71, 21))
@@ -721,8 +719,11 @@ class Ui_MainWindow(object):
     def cavv(self): 
         s.send(b"cavv\n")
     
-    def four11f(self): 
+    def four11ff(self): 
         self.four11f_signal.emit()
+
+    def four11f(self): 
+        s.send(b"411f\n")
 
     def four11o(self): 
        # s.send(b"411o\n")
@@ -1027,8 +1028,12 @@ class Ui_MainWindow(object):
             global thread 
             thread = WorkerThread()         #make instance of working class
             self.thread.json_data_rec.connect(self.on_data_ready)  #tie func to working class
-            self.thread.open_signal.connect(self.open_valve)       #tie open signal 
-            self.thread.close_signal.connect(self.close_valve)     #tie close signal 
+
+           
+
+            # self.thread.open_signal.connect(self.open_valve)       #tie open signal 
+            # self.thread.close_signal.connect(self.close_valve)     #tie close signal 
+
 
             
 
