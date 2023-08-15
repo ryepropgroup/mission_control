@@ -1053,9 +1053,10 @@ class Ui_MainWindow(object):
 
             s.connect(("127.0.0.1", PORT)) #connect to mini server
             print("connected")
-            global thread 
-            thread = WorkerThread()         #make instance of working class
+            self.thread = WorkerThread()         #make instance of working class
             self.thread.json_data_rec.connect(self.on_data_ready)  #tie func to working class
+            self.thread.start()                                    #start thread
+            print("worker thread started")
 
            
 
@@ -1066,13 +1067,10 @@ class Ui_MainWindow(object):
             
 
 
-            self.thread.start()                                    #start thread
-            print("button thread started")
+          
 
 
             #self.b_thread = ButtonThread()
-            self.b_thread.start()
-            self.b_thread.open_signal.connect(self.b_thread.b_open)
        
 
             print("button thread stared")
