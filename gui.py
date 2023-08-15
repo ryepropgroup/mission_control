@@ -40,7 +40,7 @@ import json
 
 
 import socket
-PORT = 6969
+PORT = 6970
 
 
 
@@ -168,7 +168,6 @@ class Ui_MainWindow(object):
         self.four_one_oneF.setObjectName("411")
         self.four_one_oneF.setStyleSheet("QPushButton { background-color: orange; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
         self.four_one_oneF.setText("4.1.1f")
-        self.four_one_oneF.clicked.connect(self.four11f)
         self.four_one_oneF.clicked.connect(lambda: self.four11f(b"411f\n"))
 
         self.four_one_oneO = QtWidgets.QPushButton(self.centralwidget)
@@ -755,11 +754,12 @@ class Ui_MainWindow(object):
         s.send(b"cavv\n")
 
     def four11f(self,name): 
-        
         s.send(name)
+        print("4.1.1 f")
 
     def four11o(self,name): 
        s.send(name)
+       print("4.1.1 o")
        #self.four11o_signal.emit()
 
     def three__six(self): 
