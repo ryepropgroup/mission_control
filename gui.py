@@ -16,7 +16,8 @@ from PyQt5.QtCore import QObject, pyqtSignal
 
 #from linearGauge file to add linear gauge custom widgets
 from updated_gauge import LinearGauge
-
+from p10_gauge import P10_Gauge
+from p21_22_31_32_gauge import P21_P22_P31_P32
 
 from verticaltempgauge import VerticalTempLinearGauge
 from functools import partial
@@ -118,6 +119,29 @@ class Ui_MainWindow(object):
         self.mach_logo.setObjectName("mach_logo")
 
 
+        self.start_io = QtWidgets.QPushButton(self.centralwidget)
+        self.start_io.setGeometry(QtCore.QRect(300, 50, 90, 55))
+        font = QtGui.QFont()
+        font.setFamily("Helvetica")
+        font.setPointSize(18)
+        self.start_io.setFont(font)
+        self.start_io.setObjectName("start_io")
+        self.start_io.setStyleSheet("QPushButton { background-color: #134f5c; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
+        self.start_io.setText("START IO")
+        self.start_io.clicked.connect(self.startIO)
+
+        self.stop_io = QtWidgets.QPushButton(self.centralwidget)
+        self.stop_io.setGeometry(QtCore.QRect(420, 50, 90, 55))
+        font = QtGui.QFont()
+        font.setFamily("Helvetica")
+        font.setPointSize(18)
+        self.stop_io.setFont(font)
+        self.stop_io.setObjectName("stop_io")
+        self.stop_io.setStyleSheet("QPushButton { background-color: #983b5a; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
+        self.stop_io.setText("STOP IO")
+        self.stop_io.clicked.connect(self.startIO)
+
+
         #120, 600, 90, 55
         self.pwr_off = QtWidgets.QPushButton(self.centralwidget)
         self.pwr_off.setGeometry(QtCore.QRect(20, 600, 90, 55))
@@ -141,7 +165,7 @@ class Ui_MainWindow(object):
         self.four_one_oneF.setObjectName("411")
         self.four_one_oneF.setStyleSheet("QPushButton { background-color: orange; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
         self.four_one_oneF.setText("4.1.1f")
-        self.four_one_oneF.clicked.connect(thread.worker_four11f)
+        self.four_one_oneF.clicked.connect(self.four11f)
 
         self.four_one_oneO = QtWidgets.QPushButton(self.centralwidget)
         self.four_one_oneO.setGeometry(QtCore.QRect(120, 700, 90, 55))
@@ -627,7 +651,7 @@ class Ui_MainWindow(object):
 
         
 
-        self.P10 = LinearGauge(self.centralwidget)
+        self.P10 = P10_Gauge(self.centralwidget)
         self.P10.setGeometry(QtCore.QRect(170, 309, 100, 60))
         self.P10.setObjectName("P10")
         
@@ -640,11 +664,11 @@ class Ui_MainWindow(object):
         self.P20.setGeometry(QtCore.QRect(1270, 195, 100, 60))
         self.P20.setObjectName("P20")
 
-        self.P21 = LinearGauge(self.centralwidget)
+        self.P21 = P21_P22_P31_P32(self.centralwidget)
         self.P21.setGeometry(QtCore.QRect(925, 295, 100, 60))
         self.P21.setObjectName("P21")
 
-        self.P22 = LinearGauge(self.centralwidget)
+        self.P22 = P21_P22_P31_P32(self.centralwidget)
         self.P22.setGeometry(QtCore.QRect(1078, 269, 100, 60))
         self.P22.setObjectName("P22")
 
@@ -655,11 +679,11 @@ class Ui_MainWindow(object):
         self.P30.setGeometry(QtCore.QRect(1288, 498, 100, 60))
         self.P30.setObjectName("P30")
 
-        self.P31 = LinearGauge(self.centralwidget)
+        self.P31 = P21_P22_P31_P32(self.centralwidget)
         self.P31.setGeometry(QtCore.QRect(925, 453, 100, 60))
         self.P31.setObjectName("P31")
 
-        self.P32 = LinearGauge(self.centralwidget)
+        self.P32 = P21_P22_P31_P32(self.centralwidget)
         self.P32.setGeometry(QtCore.QRect(1033, 385, 100, 60))
         self.P32.setObjectName("P32")
 
@@ -711,23 +735,24 @@ class Ui_MainWindow(object):
 
 
     
-    
+    def startIO(self): 
+        s.send(b"wstart\n")
+
+    def stopIO(self): 
+        s.send(b"wstop\n")
     
     def power_off_all(self): 
         s.send(b"stop\n")
     
     def cavv(self): 
         s.send(b"cavv\n")
-    
-    def four11ff(self): 
-        self.four11f_signal.emit()
 
     def four11f(self): 
         s.send(b"411f\n")
 
     def four11o(self): 
-       # s.send(b"411o\n")
-       self.four11o_signal.emit()
+       s.send(b"411o\n")
+       #self.four11o_signal.emit()
 
     def three__six(self): 
         pass
@@ -1073,6 +1098,9 @@ class Ui_MainWindow(object):
         # self.date_label.setText(_translate("MainWindow", "TextLabel"))
 
         self.pwr_off.setText(_translate("MainWindow", "RESET"))
+        self.start_io.setText(_translate("MainWindow", "START IO"))
+        self.stop_io.setText(_translate("MainWindow", "STOP IO"))
+
 
         self.three_six.setText(_translate("MainWindow","3.6"))
         self.four_one_oneF.setText(_translate("MainWindow", "4.1.1f"))
