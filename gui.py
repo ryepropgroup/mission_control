@@ -33,6 +33,7 @@ import time
 
 #allowing us to work with JSON data
 import json
+import orjson
 
 
 
@@ -89,7 +90,83 @@ class WorkerThread(QThread):
             #trunicate
             json_data = data[:index].strip()
             self.json_data_rec.emit(json_data)
-        
+
+    def on_data_ready(self, data): 
+        try:
+                json_str = data
+                json_data = orjson.loads(json_str)
+                print(json_data)
+
+                #print(json_data['lj'])
+                p1_val = json_data['lj']['p10val']
+                p2_val = json_data['lj']['p21val']
+                p3_val = json_data['lj']['p31val']
+                
+
+                t2_thermo = json_data['lj']['t2val']
+                t3_thermo = json_data['lj']['t3val']
+
+
+                v11_s  = json_data['valves']['V11_NO']
+                v10_sb = json_data['valves']['V10']
+                v12_s  = json_data['valves']['V12_NO']
+
+                v20_sb = json_data['valves']['V20']
+                v21_sb = json_data['valves']['V21']
+                v22_sb = json_data['valves']['V22_NO']
+                v23_sb = json_data['valves']['V23_NO']
+
+                v30_sb = json_data['valves']['V30']
+                v31_sb = json_data['valves']['V31']
+                v32_s  = json_data['valves']['V32']
+                v33_sb = json_data['valves']['V33_NO']
+                v34_s  = json_data['valves']['V34']
+                v35_sb = json_data['valves']['V35_NO']
+                v36_s  = json_data['valves']['V36']
+                v37_sb = json_data['valves']['V37']
+                v38_s  = json_data['valves']['V38_NO']
+                if str(v10_sb) == "True": 
+                    ui.V10_SB_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                    ui.V10_SB_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
+
+                elif str(v10_sb) == "False": 
+                    ui.V10_SB_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
+                    ui.V10_SB_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+
+                if str(v11_s) == "True": 
+                    ui.V11_S_NO_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                    ui.V11_S_NO_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
+
+                elif str(v11_s) == "False":
+                    ui.V11_S_NO_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
+                    ui.V11_S_NO_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+
+
+                if str(v12_s) == "True": 
+                    ui.V12_S_NO_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                    ui.V12_S_NO_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
+
+                elif str(v12_s) == "False":
+                    ui.V12_S_NO_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
+                    ui.V12_S_NO_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+
+                if str(v20_sb) == "True": 
+                    ui.V20_SB_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                    ui.V20_SB_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
+
+
+
+
+
+                try:
+                    ui.P31.setValue(int(p3_val))
+                except ValueError as value_error: 
+                    pass
+
+        except json.JSONDecodeError as e:
+            pass
+        pass
+
 
 class Ui_MainWindow(object):
     #pwr off all buttoin 
@@ -778,7 +855,7 @@ class Ui_MainWindow(object):
     def on_data_ready(self,data):
         try:
                 json_str = data
-                json_data = json.loads(json_str)
+                json_data = orjson.loads(json_str)
                 print(json_data)
 
                 #print(json_data['lj'])
@@ -1059,7 +1136,7 @@ class Ui_MainWindow(object):
             s.connect(("127.0.0.1", PORT)) #connect to mini server
             print("connected")
             self.thread = WorkerThread()         #make instance of working class
-            self.thread.json_data_rec.connect(self.on_data_ready)  #tie func to working class
+            self.thread.json_data_rec.connect(self.thread.on_data_ready)  #tie func to working class
             
             self.thread.start()                                    #start thread
             print("worker thread started")
@@ -1200,7 +1277,9 @@ if __name__ == "__main__":
     
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
+    global ui
     ui = Ui_MainWindow(MainWindow)
+
     ui.connect()
 
     #update_thread = threading.Thread(target=ui.update_valve_state, daemon=True)
