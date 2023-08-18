@@ -91,81 +91,7 @@ class WorkerThread(QThread):
             json_data = data[:index].strip()
             self.json_data_rec.emit(json_data)
 
-    def on_data_ready(self, data): 
-        try:
-                json_str = data
-                json_data = orjson.loads(json_str)
-                print(json_data)
-
-                #print(json_data['lj'])
-                p1_val = json_data['lj']['p10val']
-                p2_val = json_data['lj']['p21val']
-                p3_val = json_data['lj']['p31val']
-                
-
-                t2_thermo = json_data['lj']['t2val']
-                t3_thermo = json_data['lj']['t3val']
-
-
-                v11_s  = json_data['valves']['V11_NO']
-                v10_sb = json_data['valves']['V10']
-                v12_s  = json_data['valves']['V12_NO']
-
-                v20_sb = json_data['valves']['V20']
-                v21_sb = json_data['valves']['V21']
-                v22_sb = json_data['valves']['V22_NO']
-                v23_sb = json_data['valves']['V23_NO']
-
-                v30_sb = json_data['valves']['V30']
-                v31_sb = json_data['valves']['V31']
-                v32_s  = json_data['valves']['V32']
-                v33_sb = json_data['valves']['V33_NO']
-                v34_s  = json_data['valves']['V34']
-                v35_sb = json_data['valves']['V35_NO']
-                v36_s  = json_data['valves']['V36']
-                v37_sb = json_data['valves']['V37']
-                v38_s  = json_data['valves']['V38_NO']
-                if str(v10_sb) == "True": 
-                    ui.V10_SB_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
-                    ui.V10_SB_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
-
-                elif str(v10_sb) == "False": 
-                    ui.V10_SB_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
-                    ui.V10_SB_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
-
-                if str(v11_s) == "True": 
-                    ui.V11_S_NO_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
-                    ui.V11_S_NO_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
-
-                elif str(v11_s) == "False":
-                    ui.V11_S_NO_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
-                    ui.V11_S_NO_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
-
-
-                if str(v12_s) == "True": 
-                    ui.V12_S_NO_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
-                    ui.V12_S_NO_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
-
-                elif str(v12_s) == "False":
-                    ui.V12_S_NO_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
-                    ui.V12_S_NO_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
-
-                if str(v20_sb) == "True": 
-                    ui.V20_SB_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
-                    ui.V20_SB_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
-
-
-
-
-
-                try:
-                    ui.P31.setValue(int(p3_val))
-                except ValueError as value_error: 
-                    pass
-
-        except json.JSONDecodeError as e:
-            pass
-        pass
+    
 
 
 class Ui_MainWindow(object):
@@ -203,7 +129,7 @@ class Ui_MainWindow(object):
         self.start_io.setGeometry(QtCore.QRect(300, 50, 90, 55))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
-        font.setPointSize(18)
+        font.setPointSize(14)
         self.start_io.setFont(font)
         self.start_io.setObjectName("start_io")
         self.start_io.setStyleSheet("QPushButton { background-color: #134f5c; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
@@ -214,12 +140,21 @@ class Ui_MainWindow(object):
         self.stop_io.setGeometry(QtCore.QRect(420, 50, 90, 55))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
-        font.setPointSize(18)
+        font.setPointSize(14)
         self.stop_io.setFont(font)
         self.stop_io.setObjectName("stop_io")
         self.stop_io.setStyleSheet("QPushButton { background-color: #983b5a; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
         self.stop_io.setText("STOP IO")
         self.stop_io.clicked.connect(self.stopIO)
+
+        self.fileState = QtWidgets.QLabel(self.centralwidget)
+        self.fileState.setGeometry(QtCore.QRect(300, 70, 71, 21))
+        font.setFamily("Helvetica")
+        font.setPointSize(24)
+        self.fileState.setFont(font)
+        self.fileState.setAlignment(QtCore.Qt.AlignCenter)
+        self.fileState.setObjectName("Current State")
+        self.fileState.setStyleSheet("color: blue; font-size: 16px;") 
 
 
         #120, 600, 90, 55
@@ -234,18 +169,19 @@ class Ui_MainWindow(object):
         self.pwr_off.setText("RESET")
         self.pwr_off.clicked.connect(self.power_off_all)
 
+
 #20, 500, 90, 55
 
-        self.four_one_oneF = QtWidgets.QPushButton(self.centralwidget)
-        self.four_one_oneF.setGeometry(QtCore.QRect(20, 700, 90, 55))
-        font = QtGui.QFont()
-        font.setFamily("Helvetica")
-        font.setPointSize(18)
-        self.four_one_oneF.setFont(font)
-        self.four_one_oneF.setObjectName("411")
-        self.four_one_oneF.setStyleSheet("QPushButton { background-color: orange; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
-        self.four_one_oneF.setText("4.1.1f")
-        self.four_one_oneF.clicked.connect(lambda: self.four11f(b"411f\n"))
+        # self.four_one_oneF = QtWidgets.QPushButton(self.centralwidget)
+        # self.four_one_oneF.setGeometry(QtCore.QRect(20, 700, 90, 55))
+        # font = QtGui.QFont()
+        # font.setFamily("Helvetica")
+        # font.setPointSize(18)
+        # self.four_one_oneF.setFont(font)
+        # self.four_one_oneF.setObjectName("411")
+        # self.four_one_oneF.setStyleSheet("QPushButton { background-color: orange; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
+        # self.four_one_oneF.setText("4.1.1f")
+        # self.four_one_oneF.clicked.connect(lambda: self.four11f(b"411f\n"))
 
         self.four_one_oneO = QtWidgets.QPushButton(self.centralwidget)
         self.four_one_oneO.setGeometry(QtCore.QRect(120, 700, 90, 55))
@@ -832,7 +768,7 @@ class Ui_MainWindow(object):
 
     def four11f(self,name): 
         s.send(name)
-        print("4.1.1 f")
+        s.send(b"411f\n")
 
     def four11o(self,name): 
        s.send(name)
@@ -887,9 +823,18 @@ class Ui_MainWindow(object):
                 v37_sb = json_data['valves']['V37']
                 v38_s  = json_data['valves']['V38_NO']
 
+                fileWriteState = json_data['writing']
+
+
                 
 
+                if str(fileWriteState) == "True":
+                    self.start_io.setStyleSheet("QPushButton { background-color: #134f5c; color: white; }")
+                    self.stop_io.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
 
+                elif str(fileWriteState) == "False": 
+                    self.start_io.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                    self.stop_io.setStyleSheet("QPushButton { background-color: #983b5a; color: white; }")
                 if str(v10_sb) == "True": 
                     self.V10_SB_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
                     self.V10_SB_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
@@ -1027,6 +972,8 @@ class Ui_MainWindow(object):
                 elif str(v38_s) == "False":
                     self.V38_S_NO_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
                     self.V38_S_NO_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                
+                
 
 
 
@@ -1069,6 +1016,8 @@ class Ui_MainWindow(object):
                     self.V36_S_state.setText(self.translateState(str(v36_s)))
                     self.V37_SB_state.setText(self.translateState(str(v37_sb)))
                     self.V38_S_state.setText(self.translateState(str(v38_s)))
+
+                    self.fileState.setText(self.translateState(str(fileWriteState)))
                 except ValueError as valueError:
 
                     pass
@@ -1123,10 +1072,6 @@ class Ui_MainWindow(object):
     def connect(self): 
         global s 
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #tcp socket
-
-        # global last_cmd
-        # last_cmd = "nothing"
-
         try: 
 
             #169.254.26.176
@@ -1141,23 +1086,6 @@ class Ui_MainWindow(object):
             self.thread.start()                                    #start thread
             print("worker thread started")
 
-           
-
-            # self.thread.open_signal.connect(self.open_valve)       #tie open signal 
-            # self.thread.close_signal.connect(self.close_valve)     #tie close signal 
-
-
-            
-
-
-          
-
-
-            #self.b_thread = ButtonThread()
-       
-
-            print("button thread stared")
-
         except Exception as e  : 
             print(str(e))
             print("ERR MSG: If connection is refused, either port or socket is wrong")
@@ -1166,21 +1094,17 @@ class Ui_MainWindow(object):
 
     def open_valve(self,name): 
 
-        #thread.open_signal.emit(name)
         s.send(name)
         print("open")
   
     def close_valve(self,name): 
-        #self.close_signal.emit(name)
         s.send(name)
         print("close")
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        # self.time_label.setText(_translate("MainWindow", "TextLabel"))
-        # self.date_label.setText(_translate("MainWindow", "TextLabel"))
-
+      
         self.pwr_off.setText(_translate("MainWindow", "RESET"))
         self.start_io.setText(_translate("MainWindow", "START IO"))
         self.stop_io.setText(_translate("MainWindow", "STOP IO"))
@@ -1189,14 +1113,7 @@ class Ui_MainWindow(object):
         self.three_six.setText(_translate("MainWindow","3.6"))
         self.four_one_oneF.setText(_translate("MainWindow", "4.1.1f"))
         self.four_one_oneO.setText(_translate("MainWindow", "4.1.1o"))
-        # self.close_all.setText(_translate("MainWindow", "PWR OFF ALL"))
-
-        
-        #self.pad_s.setText(_translate("MainWinsow", "SAFE"))
-
-        # self.stack_light_blue.setText(_translate("MainWindow", ""))
-        # self.stack_light_green.setText(_translate("MainWindow", ""))
-        # self.stack_light_yellow.setText(_translate("MainWindow", ""))
+    
     
 
 

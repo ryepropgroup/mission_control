@@ -2,6 +2,7 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
 from PyQt5.QtCore import Qt, QRect, QBasicTimer, QPoint
 from PyQt5.QtGui import QPainter, QPen, QFont, QColor, QPolygon
+from updated_gauge import LinearGauge
 
 
 class VerticalTempLinearGauge(QWidget):
