@@ -172,16 +172,16 @@ class Ui_MainWindow(object):
 
 #20, 500, 90, 55
 
-        # self.four_one_oneF = QtWidgets.QPushButton(self.centralwidget)
-        # self.four_one_oneF.setGeometry(QtCore.QRect(20, 700, 90, 55))
-        # font = QtGui.QFont()
-        # font.setFamily("Helvetica")
-        # font.setPointSize(18)
-        # self.four_one_oneF.setFont(font)
-        # self.four_one_oneF.setObjectName("411")
-        # self.four_one_oneF.setStyleSheet("QPushButton { background-color: orange; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
-        # self.four_one_oneF.setText("4.1.1f")
-        # self.four_one_oneF.clicked.connect(lambda: self.four11f(b"411f\n"))
+        self.four_one_oneF = QtWidgets.QPushButton(self.centralwidget)
+        self.four_one_oneF.setGeometry(QtCore.QRect(20, 700, 90, 55))
+        font = QtGui.QFont()
+        font.setFamily("Helvetica")
+        font.setPointSize(18)
+        self.four_one_oneF.setFont(font)
+        self.four_one_oneF.setObjectName("411")
+        self.four_one_oneF.setStyleSheet("QPushButton { background-color: orange; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
+        self.four_one_oneF.setText("4.1.1f")
+        self.four_one_oneF.clicked.connect(lambda: self.four11f(b"411f\n"))
 
         self.four_one_oneO = QtWidgets.QPushButton(self.centralwidget)
         self.four_one_oneO.setGeometry(QtCore.QRect(120, 700, 90, 55))
@@ -800,8 +800,8 @@ class Ui_MainWindow(object):
                 p3_val = json_data['lj']['p31val']
                 
 
-                t2_thermo = json_data['lj']['t2val']
-                t3_thermo = json_data['lj']['t3val']
+                t2_thermo = json_data['lj']['t1val']
+                t3_thermo = json_data['lj']['t2val']
 
 
                 v11_s  = json_data['valves']['V11_NO']
@@ -1081,7 +1081,7 @@ class Ui_MainWindow(object):
             s.connect(("127.0.0.1", PORT)) #connect to mini server
             print("connected")
             self.thread = WorkerThread()         #make instance of working class
-            self.thread.json_data_rec.connect(self.thread.on_data_ready)  #tie func to working class
+            self.thread.json_data_rec.connect(self.on_data_ready)  #tie func to working class
             
             self.thread.start()                                    #start thread
             print("worker thread started")
