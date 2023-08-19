@@ -5,18 +5,18 @@ from PyQt5.QtGui import QPainter, QPen, QFont, QColor, QPolygon
 from updated_gauge import LinearGauge
 
 
-class VerticalTempLinearGauge(QWidget):
+class T31(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setMaximumSize(60, 100)  # Increased width to accommodate the reading text
         self.value = 0
-        self.max_value = 200
+        self.max_value = 100
         self.min_value = -50
         self.value_colors = [
-            (),
-            (),
-            (),
-            ()
+            (-50,Qt.green),
+            (25, Qt.yellow),
+            (35, Qt.red),
+            (100, Qt.red)
             
         ]
         self.direction = 1  # 1 for increasing, -1 for decreasing

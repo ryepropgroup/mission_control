@@ -5,19 +5,20 @@ from PyQt5.QtGui import QPainter, QPen, QFont, QColor, QPolygon
 from updated_gauge import LinearGauge
 
 
-class VerticalTempLinearGauge(QWidget):
+class T21(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setMaximumSize(60, 100)  # Increased width to accommodate the reading text
         self.value = 0
-        self.max_value = 200
-        self.min_value = -50
+        self.max_value = 100
+        self.min_value = 0
         self.value_colors = [
+            
             (0, Qt.green),
             (30, Qt.yellow),
             (50, Qt.red),
-            (100, Qt.red)
-            
+            (100, Qt.red),
+            (100, Qt.red) 
         ]
         self.direction = 1  # 1 for increasing, -1 for decreasing
         self.timer = QBasicTimer()
@@ -62,6 +63,7 @@ class VerticalTempLinearGauge(QWidget):
         value_text = f'{self.value} °C'
         font = QFont(self.font())
         font.setBold(True)
+        font.setPointSize(9)
         painter.setFont(font)
         painter.setPen(QPen(Qt.black))
         text_rect = QRect(self.width() - 40, 0, 40, self.height())
