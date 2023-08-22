@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#g -*- coding: utf-8 -*-
 
 # Form implementation generated from reading ui file 'gui.ui'
 #
@@ -43,7 +43,7 @@ import orjson
 
 
 import socket
-PORT = 6006
+PORT = 8008
 
 
 
@@ -57,6 +57,86 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
 from PyQt5.QtCore import Qt, QRect, QBasicTimer, QPoint , QThread, pyqtSignal
 from PyQt5.QtGui import QPainter, QPen, QFont, QColor, QPolygon
+
+
+
+
+class SequencesWorkerThread(QThread): 
+    four11f_signal = pyqtSignal(object)
+    four11o_signal = pyqtSignal(object)
+
+
+    # std::this_thread::sleep_for(10s);
+    # // open v20
+    # LJM_eWriteName(handle, vlj.at("V20").c_str(), 0);
+    # std::this_thread::sleep_for(7s);
+    # // close v21
+    # LJM_eWriteName(handle, vlj.at("V21").c_str(), 1);
+    # std::this_thread::sleep_for(3s);
+    # // close v20
+    # LJM_eWriteName(handle, vlj.at("V20").c_str(), 1);
+    # // close
+    # return;
+
+
+    def __init__(self):
+            QThread.__init__(self)
+
+
+    def seq_411o(self): 
+    # // open v34
+    # LJM_eWriteName(handle, vlj.at("V34").c_str(), 0);
+    # std::this_thread::sleep_for(10s);
+    # // close v34
+    # LJM_eWriteName(handle, vlj.at("V34").c_str(), 1);
+
+    # // open v30
+    # LJM_eWriteName(handle, vlj.at("V30").c_str(), 0);
+    # std::this_thread::sleep_for(3s);
+
+    # // close v30 and v31 and open v33
+    # LJM_eWriteName(handle, vlj.at("V30").c_str(), 1);
+    # LJM_eWriteName(handle, vlj.at("V31").c_str(), 1);
+    # LJM_eWriteName(handle, vlj.at("V33_NO").c_str(), 0);
+    # std::this_thread::sleep_for(7s);
+    # LJM_eWriteName(handle, vlj.at("V33_NO").c_str(), 1);
+
+        print("4110 seq started")
+        ui.open_valve(b"V34_open\n")
+
+        time.sleep(10)
+        ui.open_valve(b"V34_close\n")
+
+        ui.open_valve(b"V30_open\n")
+        time.sleep(3)
+        
+        ui.close_valve(b"V30_close\n")
+        ui.close_valve(b"V31_close\n")
+        ui.open_valve(b"V33_NO_open\n")
+
+        time.sleep(7)
+
+        ui.close_valve(b"V33_NO_close\n")
+
+
+
+
+    def seq_411f(self): 
+        print("411f seq started")
+        time.sleep(10)
+        ui.open_valve(b"V20_open\n")
+
+        time.sleep(7)
+        ui.close_valve(b"V21_open\n")
+
+        time.sleep(3)
+        ui.close_valve(b"V20_close\n")
+
+
+
+        print("seq 411f finished")
+
+
 
 class WorkerThread(QThread):
 
@@ -749,12 +829,6 @@ class Ui_MainWindow(object):
         
         #update date and time 
         self.time_label.setText(current_time)
-
-
-
-
-
-
     
     def startIO(self): 
         print("file write started")
@@ -770,26 +844,18 @@ class Ui_MainWindow(object):
     def cavv(self): 
         s.send(b"cavv\n")
 
-    def four11f(self,name): 
-        s.send(name)
-        s.send(b"411f\n")
+    def four11f(self): 
+       sThread.four11f_signal.emit()
 
-    def four11o(self,name): 
-       s.send(name)
-       print("4.1.1 o")
+    def four11o(self): 
+       
+       sThread.four11o_signal.emit()
 
-    def three__six(self): 
-        pass
 
     def three_five_one(self):
         s.send(b"351\n")
-    
-    def valve_seq(self):
-        s.send(b"seq\n")
 
 
-    def get_data(self): 
-        thread = WorkerThread()
         
     def on_data_ready(self,data):
         try:
@@ -1101,14 +1167,28 @@ class Ui_MainWindow(object):
             #169.254.26.176
             #127.0.0.1
             #10.42.0.1
-
-            s.connect(("127.0.0.1", PORT)) #connect to mini server
+            #172,20.10,2
+            #192.168.1.255
+            
+            s.connect(("10.42.0.1", PORT)) #connect to mini server
             print("connected")
             self.thread = WorkerThread()         #make instance of working class
             self.thread.json_data_rec.connect(self.on_data_ready)  #tie func to working class
-            
             self.thread.start()                                    #start thread
             print("worker thread started")
+
+            global sThread 
+            sThread = SequencesWorkerThread()
+            sThread.four11f_signal.connect(sThread.seq_411f)
+            sThread.four11o_signal.connect(sThread.seq_411o)
+            sThread.start()
+            print("sequnce thread started")
+            
+    
+           
+
+            
+            
 
         except Exception as e  : 
             print(str(e))
