@@ -43,7 +43,7 @@ import orjson
 
 
 import socket
-PORT = 8008
+PORT = 6970
 
 
 
@@ -280,7 +280,7 @@ class Ui_MainWindow(object):
         self.four_one_oneF.setObjectName("411")
         self.four_one_oneF.setStyleSheet("QPushButton { background-color: orange; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
         self.four_one_oneF.setText("4.1.1f")
-        self.four_one_oneF.clicked.connect(lambda: self.four11f(b"411f\n"))
+        self.four_one_oneF.clicked.connect(self.four11f)
 
         self.four_one_oneO = QtWidgets.QPushButton(self.centralwidget)
         self.four_one_oneO.setGeometry(QtCore.QRect(120, 700, 90, 55))
@@ -291,7 +291,7 @@ class Ui_MainWindow(object):
         self.four_one_oneO.setObjectName("411")
         self.four_one_oneO.setStyleSheet("QPushButton { background-color: #7120FF; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
         self.four_one_oneO.setText("4.1.1o")
-        self.four_one_oneO.clicked.connect(lambda: self.four11o(b"411o\n"))
+        self.four_one_oneO.clicked.connect(self.four11o)
        
         
         
@@ -305,7 +305,7 @@ class Ui_MainWindow(object):
         self.three_six.setObjectName("3.6")
         self.three_six.setText("3.6")
         self.three_six.setStyleSheet("QPushButton { background-color: #ffcc5c; color: white; }" "QPushButton:pressed { background-color: #ffeead; }")
-        self.three_six.clicked.connect(self.three__six)
+        #self.three_six.clicked.connect(self.three__six)
 
 
         self.three_six = QtWidgets.QPushButton(self.centralwidget)
@@ -317,7 +317,7 @@ class Ui_MainWindow(object):
         self.three_six.setObjectName("3.6")
         self.three_six.setText("3.6")
         self.three_six.setStyleSheet("QPushButton { background-color: #ffcc5c; color: white; }" "QPushButton:pressed { background-color: #ffeead; }")
-        self.three_six.clicked.connect(self.three_five_one)
+        #self.three_six.clicked.connect(self.three_five_one)
 
 
         #Valve 10 sb open, close, and state
@@ -845,11 +845,10 @@ class Ui_MainWindow(object):
         s.send(b"cavv\n")
 
     def four11f(self): 
-       sThread.four11f_signal.emit()
+       sThread.four11f_signal.emit(self)
 
     def four11o(self): 
-       
-       sThread.four11o_signal.emit()
+       sThread.four11o_signal.emit(self)
 
 
     def three_five_one(self):
@@ -868,16 +867,16 @@ class Ui_MainWindow(object):
                 p2_val = json_data['lj']['p21val']
                 p3_val = json_data['lj']['p31val']
 
-                p20_val = json_data['lj']['p20val']
-                p30_val = json_data['lj']['p30val']
+                # p20_val = json_data['lj']['p20val']
+                # p30_val = json_data['lj']['p30val']
 
-                p22_val = json_data['lj']['p22val']
-                p32_val = json_data['lj']['p32val']
+                # p22_val = json_data['lj']['p22val']
+                # p32_val = json_data['lj']['p32val']
              
                 
 
-                t2_thermo = json_data['lj']['t1val']
-                t3_thermo = json_data['lj']['t2val']
+                t2_thermo = json_data['lj']['t2val']
+                t3_thermo = json_data['lj']['t3val']
 
 
                 v11_s  = json_data['valves']['V11_NO']
@@ -899,18 +898,18 @@ class Ui_MainWindow(object):
                 v37_sb = json_data['valves']['V37']
                 v38_s  = json_data['valves']['V38_NO']
 
-                fileWriteState = json_data['writing']
+                # fileWriteState = json_data['writing']
 
 
                 
 
-                if str(fileWriteState) == "True":
-                    self.start_io.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
-                    self.stop_io.setStyleSheet("QPushButton { background-color: #983b5a; color: white; }")
-
-                elif str(fileWriteState) == "False": 
-                    self.start_io.setStyleSheet("QPushButton { background-color: #134f5c; color: white; }")
-                    self.stop_io.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                # if str(fileWriteState) == "True":
+                #     self.start_io.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                #     self.stop_io.setStyleSheet("QPushButton { background-color: #983b5a; color: white; }")
+                #
+                # elif str(fileWriteState) == "False": 
+                #     self.start_io.setStyleSheet("QPushButton { background-color: #134f5c; color: white; }")
+                #     self.stop_io.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
                 if str(v10_sb) == "True": 
                     self.V10_SB_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
                     self.V10_SB_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
@@ -1070,11 +1069,11 @@ class Ui_MainWindow(object):
                     self.P21.setValue(int(p2_val))
 
                     self.P10.setValue(int(p1_val))
-                    self.P20.setValue(int(p20_val))
-                    self.P30.setValue(int(p30_val))
+                    # self.P20.setValue(int(p20_val))
+                    # self.P30.setValue(int(p30_val))
                     
-                    self.P22.setValue(int(p22_val))
-                    self.P32.setValue(int(p32_val))
+                    # self.P22.setValue(int(p22_val))
+                    # self.P32.setValue(int(p32_val))
                     
                     self.T2_ETH_RUN.setValue(int(t2_thermo))
                     self.T3_N2O_run.setValue(int(t3_thermo))
@@ -1100,7 +1099,7 @@ class Ui_MainWindow(object):
                     self.V37_SB_state.setText(self.translateState(str(v37_sb)))
                     self.V38_S_state.setText(self.translateState(str(v38_s)))
 
-                    self.fileState.setText(self.translateFileState(str(fileWriteState)))
+                    # self.fileState.setText(self.translateFileState(str(fileWriteState)))
                 except ValueError as valueError:
 
                     pass
@@ -1170,19 +1169,14 @@ class Ui_MainWindow(object):
             #172,20.10,2
             #192.168.1.255
             
-            s.connect(("10.42.0.1", PORT)) #connect to mini server
+            s.connect(("127.0.0.1", PORT)) #connect to mini server
             print("connected")
             self.thread = WorkerThread()         #make instance of working class
             self.thread.json_data_rec.connect(self.on_data_ready)  #tie func to working class
             self.thread.start()                                    #start thread
             print("worker thread started")
 
-            global sThread 
-            sThread = SequencesWorkerThread()
-            sThread.four11f_signal.connect(sThread.seq_411f)
-            sThread.four11o_signal.connect(sThread.seq_411o)
-            sThread.start()
-            print("sequnce thread started")
+            #print("sequnce thread start9009ed")
             
     
            
@@ -1197,7 +1191,6 @@ class Ui_MainWindow(object):
             # sys.exit(1)
 
     def open_valve(self,name): 
-
         s.send(name)
         print("open")
   
@@ -1303,6 +1296,11 @@ if __name__ == "__main__":
 
     ui.connect()
 
+    global sThread 
+    sThread = SequencesWorkerThread()
+    sThread.four11f_signal.connect(sThread.seq_411f)
+    sThread.four11o_signal.connect(sThread.seq_411o)
+    sThread.start()
     #update_thread = threading.Thread(target=ui.update_valve_state, daemon=True)
     #update_thread.start()
     #ui.setupUi(MainWindow)
