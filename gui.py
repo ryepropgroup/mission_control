@@ -21,10 +21,10 @@ from p21_22_31_32_gauge import P21_P22_P31_P32
 
 from t31 import T31 
 from t21 import T21
-
 from engine_p20_p30_gauge import engineP20_30
-
 from verticaltempgauge import VerticalTempLinearGauge
+
+from igniter_TC import Igniter_TC
 from functools import partial
 
 #allow different parts of the program to run concurrently 
@@ -60,81 +60,6 @@ from PyQt5.QtGui import QPainter, QPen, QFont, QColor, QPolygon
 
 
 
-
-class SequencesWorkerThread(QThread): 
-    four11f_signal = pyqtSignal(object)
-    four11o_signal = pyqtSignal(object)
-
-
-    # std::this_thread::sleep_for(10s);
-    # // open v20
-    # LJM_eWriteName(handle, vlj.at("V20").c_str(), 0);
-    # std::this_thread::sleep_for(7s);
-    # // close v21
-    # LJM_eWriteName(handle, vlj.at("V21").c_str(), 1);
-    # std::this_thread::sleep_for(3s);
-    # // close v20
-    # LJM_eWriteName(handle, vlj.at("V20").c_str(), 1);
-    # // close
-    # return;
-
-
-    def __init__(self):
-            QThread.__init__(self)
-
-
-    def seq_411o(self): 
-    # // open v34
-    # LJM_eWriteName(handle, vlj.at("V34").c_str(), 0);
-    # std::this_thread::sleep_for(10s);
-    # // close v34
-    # LJM_eWriteName(handle, vlj.at("V34").c_str(), 1);
-
-    # // open v30
-    # LJM_eWriteName(handle, vlj.at("V30").c_str(), 0);
-    # std::this_thread::sleep_for(3s);
-
-    # // close v30 and v31 and open v33
-    # LJM_eWriteName(handle, vlj.at("V30").c_str(), 1);
-    # LJM_eWriteName(handle, vlj.at("V31").c_str(), 1);
-    # LJM_eWriteName(handle, vlj.at("V33_NO").c_str(), 0);
-    # std::this_thread::sleep_for(7s);
-    # LJM_eWriteName(handle, vlj.at("V33_NO").c_str(), 1);
-
-        print("4110 seq started")
-        ui.open_valve(b"V34_open\n")
-
-        time.sleep(10)
-        ui.open_valve(b"V34_close\n")
-
-        ui.open_valve(b"V30_open\n")
-        time.sleep(3)
-        
-        ui.close_valve(b"V30_close\n")
-        ui.close_valve(b"V31_close\n")
-        ui.open_valve(b"V33_NO_open\n")
-
-        time.sleep(7)
-
-        ui.close_valve(b"V33_NO_close\n")
-
-
-
-
-    def seq_411f(self): 
-        print("411f seq started")
-        time.sleep(10)
-        ui.open_valve(b"V20_open\n")
-
-        time.sleep(7)
-        ui.close_valve(b"V21_open\n")
-
-        time.sleep(3)
-        ui.close_valve(b"V20_close\n")
-
-
-
-        print("seq 411f finished")
 
 
 
@@ -296,28 +221,30 @@ class Ui_MainWindow(object):
         
         
 
-        self.three_six = QtWidgets.QPushButton(self.centralwidget)
-        self.three_six.setGeometry(QtCore.QRect(220, 600, 90, 55))
+        self.operation5 = QtWidgets.QPushButton(self.centralwidget)
+        self.operation5.setGeometry(QtCore.QRect(220, 700, 90, 55))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
         font.setPointSize(16)
-        self.three_six.setFont(font)
-        self.three_six.setObjectName("3.6")
-        self.three_six.setText("3.6")
-        self.three_six.setStyleSheet("QPushButton { background-color: #ffcc5c; color: white; }" "QPushButton:pressed { background-color: #ffeead; }")
-        #self.three_six.clicked.connect(self.three__six)
+        self.operation5.setFont(font)
+        self.operation5.setObjectName("OP 5")
+        self.operation5.setText("OP 5")
+        self.operation5.setStyleSheet("QPushButton { background-color: #ffcc5c; color: white; }" "QPushButton:pressed { background-color: #FF8333; }")
+        self.operation5.clicked.connect(self.op5)
 
-
-        self.three_six = QtWidgets.QPushButton(self.centralwidget)
-        self.three_six.setGeometry(QtCore.QRect(220, 600, 90, 55))
+        self.operation6 = QtWidgets.QPushButton(self.centralwidget)
+        self.operation6.setGeometry(QtCore.QRect(320, 700, 90, 55))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
         font.setPointSize(16)
-        self.three_six.setFont(font)
-        self.three_six.setObjectName("3.6")
-        self.three_six.setText("3.6")
-        self.three_six.setStyleSheet("QPushButton { background-color: #ffcc5c; color: white; }" "QPushButton:pressed { background-color: #ffeead; }")
-        #self.three_six.clicked.connect(self.three_five_one)
+        self.operation6.setFont(font)
+        self.operation6.setObjectName("OP 6")
+        self.operation6.setText("OP 6")
+        self.operation6.setStyleSheet("QPushButton { background-color: #7F8C8D; color: white; }" "QPushButton:pressed { background-color: #D2D2D2; }")
+        self.operation6.clicked.connect(self.op6)
+
+
+     
 
 
         #Valve 10 sb open, close, and state
@@ -800,13 +727,56 @@ class Ui_MainWindow(object):
         self.P32.setObjectName("P32")
 
 
+        self.inj1VAL = LinearGauge(self.centralwidget)
+        self.inj1VAL.setGeometry(QtCore.QRect(1180, 710, 100, 60)) 
+        self.inj1VAL.setObjectName("INJ 1 VAL")  
+        
+        self.inj1Label = QtWidgets.QLabel(self.centralwidget)
+        self.inj1Label.setGeometry(QtCore.QRect(1200, 760, 60, 16))
+        font = QtGui.QFont()
+        font.setFamily("Helvetica")
+        font.setPointSize(14)
+        self.inj1Label.setFont(font)
+        self.inj1Label.setAlignment(QtCore.Qt.AlignCenter)
+        self.inj1Label.setObjectName("inj 1 label")
+
+        self.inj2VAL = LinearGauge(self.centralwidget)
+        self.inj2VAL.setGeometry(QtCore.QRect(1300, 710, 100, 60)) 
+        self.inj2VAL.setObjectName("INJ 1 VAL")  
+        
+        self.inj2Label = QtWidgets.QLabel(self.centralwidget)
+        self.inj2Label.setGeometry(QtCore.QRect(1320, 760, 60, 16))
+        font = QtGui.QFont()
+        font.setFamily("Helvetica")
+        font.setPointSize(14)
+        self.inj2Label.setFont(font)
+        self.inj2Label.setAlignment(QtCore.Qt.AlignCenter)
+        self.inj2Label.setObjectName("inj 2 label")
+        
+
+
+
         self.T2_ETH_RUN = T21(self.centralwidget)
         self.T2_ETH_RUN.setGeometry(QtCore.QRect(804, 270, 60, 100))
         self.T2_ETH_RUN.setObjectName("T2 ETH RUN")
+
  
         self.T3_N2O_run = T31(self.centralwidget)
         self.T3_N2O_run.setGeometry(QtCore.QRect(698, 435, 60, 100))
         self.T3_N2O_run.setObjectName("T3 N20 RUN")
+
+        self.IGNITER_TC = Igniter_TC(self.centralwidget)
+        self.IGNITER_TC.setGeometry(QtCore.QRect(1290, 560, 60, 100))
+        self.IGNITER_TC.setObjectName("IGNITER TC")
+
+        self.igniter_label = QtWidgets.QLabel(self.centralwidget)
+        self.igniter_label.setGeometry(QtCore.QRect(1330, 590, 80, 16))
+        font = QtGui.QFont()
+        font.setFamily("Helvetica")
+        font.setPointSize(16)
+        self.igniter_label.setFont(font)
+        self.igniter_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.igniter_label.setObjectName("igniter label")
  
 
 
@@ -841,18 +811,32 @@ class Ui_MainWindow(object):
     def power_off_all(self): 
         s.send(b"stop\n")
     
-    def cavv(self): 
-        s.send(b"cavv\n")
+    # def cavv(self): 
+    #     s.send(b"cavv\n")
+
+    def op5(self): 
+        s.send(b"op5\n")
+        #sending hot fire procedure 
+
+
+    def op6(self): 
+        s.send(b"op6\n")
+        #sending op6 procedure to gremlin
+    
+    def three51(self):
+        s.send(b"351\n")
 
     def four11f(self): 
-       sThread.four11f_signal.emit(self)
+        s.send(b"411f\n")
+        print("Seq 411f command sent")
+       
 
     def four11o(self): 
-       sThread.four11o_signal.emit(self)
+       s.send(b"f11o\n")
+       print("Seq 411o command sent")
 
+     
 
-    def three_five_one(self):
-        s.send(b"351\n")
 
 
         
@@ -867,16 +851,22 @@ class Ui_MainWindow(object):
                 p2_val = json_data['lj']['p21val']
                 p3_val = json_data['lj']['p31val']
 
-                # p20_val = json_data['lj']['p20val']
-                # p30_val = json_data['lj']['p30val']
+                p20_val = json_data['lj']['p20val']
+                p30_val = json_data['lj']['p30val']
 
-                # p22_val = json_data['lj']['p22val']
-                # p32_val = json_data['lj']['p32val']
+                p22_val = json_data['lj']['p22val']
+                p32_val = json_data['lj']['p32val']
              
                 
 
                 t2_thermo = json_data['lj']['t2val']
                 t3_thermo = json_data['lj']['t3val']
+
+                pinJval = json_data["lj"]["pinjval"] 
+                lcval   = json_data["lj"]["lcval"]
+                inj1val = json_data["lj"]["inj1val"]
+                inj2val = json_data["lj"]["inj2val"]
+                ignVal  = json_data["lj"]["ignval"]
 
 
                 v11_s  = json_data['valves']['V11_NO']
@@ -898,18 +888,19 @@ class Ui_MainWindow(object):
                 v37_sb = json_data['valves']['V37']
                 v38_s  = json_data['valves']['V38_NO']
 
-                # fileWriteState = json_data['writing']
+                fileWriteState = json_data['writing']
 
 
                 
 
-                # if str(fileWriteState) == "True":
-                #     self.start_io.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
-                #     self.stop_io.setStyleSheet("QPushButton { background-color: #983b5a; color: white; }")
-                #
-                # elif str(fileWriteState) == "False": 
-                #     self.start_io.setStyleSheet("QPushButton { background-color: #134f5c; color: white; }")
-                #     self.stop_io.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                if str(fileWriteState) == "True":
+                    self.start_io.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+                    self.stop_io.setStyleSheet("QPushButton { background-color: #983b5a; color: white; }")
+                
+                elif str(fileWriteState) == "False": 
+                    self.start_io.setStyleSheet("QPushButton { background-color: #134f5c; color: white; }")
+                    self.stop_io.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
+
                 if str(v10_sb) == "True": 
                     self.V10_SB_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
                     self.V10_SB_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
@@ -1069,14 +1060,20 @@ class Ui_MainWindow(object):
                     self.P21.setValue(int(p2_val))
 
                     self.P10.setValue(int(p1_val))
-                    # self.P20.setValue(int(p20_val))
-                    # self.P30.setValue(int(p30_val))
+                    self.P20.setValue(int(p20_val))
+                    self.P30.setValue(int(p30_val))
                     
-                    # self.P22.setValue(int(p22_val))
-                    # self.P32.setValue(int(p32_val))
+                    self.P22.setValue(int(p22_val))
+                    self.P32.setValue(int(p32_val))
+
+                    self.inj1VAL.setValue(int(inj1val))
+                    self.inj2VAL.setValue(int(inj2val))
+
+                    
                     
                     self.T2_ETH_RUN.setValue(int(t2_thermo))
                     self.T3_N2O_run.setValue(int(t3_thermo))
+                    self.IGNITER_TC.setValue(int(ignVal))
 
 
                     self.V10_SB_state.setText(self.translateState(str(v10_sb)))
@@ -1207,11 +1204,17 @@ class Ui_MainWindow(object):
         self.stop_io.setText(_translate("MainWindow", "STOP IO"))
 
 
-        self.three_six.setText(_translate("MainWindow","3.6"))
+        self.operation5.setText(_translate("MainWindow","OP 5"))
+        self.operation6.setText(_translate("MainWindow","OP 6"))
         self.four_one_oneF.setText(_translate("MainWindow", "4.1.1f"))
         self.four_one_oneO.setText(_translate("MainWindow", "4.1.1o"))
     
     
+
+        self.inj1Label.setText(_translate("MainWindow", "INJ 1"))
+        self.inj2Label.setText(_translate("MainWindow", "INJ 2"))
+        self.igniter_label.setText(_translate("MainWindow", "IGNTR TC"))
+
 
 
         self.V10_SB_open.setText(_translate("MainWindow", "OPEN"))
@@ -1295,12 +1298,6 @@ if __name__ == "__main__":
     ui = Ui_MainWindow(MainWindow)
 
     ui.connect()
-
-    global sThread 
-    sThread = SequencesWorkerThread()
-    sThread.four11f_signal.connect(sThread.seq_411f)
-    sThread.four11o_signal.connect(sThread.seq_411o)
-    sThread.start()
     #update_thread = threading.Thread(target=ui.update_valve_state, daemon=True)
     #update_thread.start()
     #ui.setupUi(MainWindow)
