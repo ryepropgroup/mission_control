@@ -23,6 +23,7 @@ from t31 import T31
 from t21 import T21
 from engine_p20_p30_gauge import engineP20_30
 from verticaltempgauge import VerticalTempLinearGauge
+from engine_tcs import Engine_TC
 
 from igniter_TC import Igniter_TC
 from functools import partial
@@ -726,13 +727,24 @@ class Ui_MainWindow(object):
         self.P32.setGeometry(QtCore.QRect(1033, 385, 100, 60))
         self.P32.setObjectName("P32")
 
+        self.pressureInj = engineP20_30(self.centralwidget)
+        self.pressureInj.setGeometry(QtCore.QRect(1300, 710, 100, 60)) 
+        self.pressureInj.setObjectName("P INJ VAL")  
+        self.pinjv_label = QtWidgets.QLabel(self.centralwidget)
+        self.pinjv_label.setGeometry(QtCore.QRect(1320, 760, 70, 16))
+        font = QtGui.QFont()
+        font.setFamily("Helvetica")
+        font.setPointSize(14)
+        self.pinjv_label.setFont(font)
+        self.pinjv_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.pinjv_label.setObjectName("p inj valve")
 
-        self.inj1VAL = LinearGauge(self.centralwidget)
-        self.inj1VAL.setGeometry(QtCore.QRect(1180, 710, 100, 60)) 
+
+        self.inj1VAL = Engine_TC(self.centralwidget)
+        self.inj1VAL.setGeometry(QtCore.QRect(1240, 50, 60, 100)) 
         self.inj1VAL.setObjectName("INJ 1 VAL")  
-        
         self.inj1Label = QtWidgets.QLabel(self.centralwidget)
-        self.inj1Label.setGeometry(QtCore.QRect(1200, 760, 60, 16))
+        self.inj1Label.setGeometry(QtCore.QRect(1230, 30, 60, 16))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
         font.setPointSize(14)
@@ -740,18 +752,31 @@ class Ui_MainWindow(object):
         self.inj1Label.setAlignment(QtCore.Qt.AlignCenter)
         self.inj1Label.setObjectName("inj 1 label")
 
-        self.inj2VAL = LinearGauge(self.centralwidget)
-        self.inj2VAL.setGeometry(QtCore.QRect(1300, 710, 100, 60)) 
-        self.inj2VAL.setObjectName("INJ 1 VAL")  
-        
+        self.inj2VAL = Engine_TC(self.centralwidget)
+        self.inj2VAL.setGeometry(QtCore.QRect(1300, 50, 60, 100)) 
+        self.inj2VAL.setObjectName("INJ 2 VAL")  
         self.inj2Label = QtWidgets.QLabel(self.centralwidget)
-        self.inj2Label.setGeometry(QtCore.QRect(1320, 760, 60, 16))
+        self.inj2Label.setGeometry(QtCore.QRect(1290, 30, 60, 16))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
         font.setPointSize(14)
         self.inj2Label.setFont(font)
         self.inj2Label.setAlignment(QtCore.Qt.AlignCenter)
         self.inj2Label.setObjectName("inj 2 label")
+
+        self.LC_VAL = Engine_TC(self.centralwidget)
+        self.LC_VAL.setGeometry(QtCore.QRect(1300, 580, 60, 100)) 
+        self.LC_VAL.setObjectName("LC")  
+        self.lc_label = QtWidgets.QLabel(self.centralwidget)
+        self.lc_label.setGeometry(QtCore.QRect(1350, 625, 60, 16))
+        font = QtGui.QFont()
+        font.setFamily("Helvetica")
+        font.setPointSize(14)
+        self.lc_label.setFont(font)
+        self.lc_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.lc_label.setObjectName("lc label")
+        
+
         
 
 
@@ -766,11 +791,15 @@ class Ui_MainWindow(object):
         self.T3_N2O_run.setObjectName("T3 N20 RUN")
 
         self.IGNITER_TC = Igniter_TC(self.centralwidget)
-        self.IGNITER_TC.setGeometry(QtCore.QRect(1290, 560, 60, 100))
+        self.IGNITER_TC.setGeometry(QtCore.QRect(1360, 50, 60, 100))
         self.IGNITER_TC.setObjectName("IGNITER TC")
 
+    
+
+
+
         self.igniter_label = QtWidgets.QLabel(self.centralwidget)
-        self.igniter_label.setGeometry(QtCore.QRect(1330, 590, 80, 16))
+        self.igniter_label.setGeometry(QtCore.QRect(1350, 30, 60, 16))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
         font.setPointSize(16)
@@ -1068,6 +1097,10 @@ class Ui_MainWindow(object):
 
                     self.inj1VAL.setValue(int(inj1val))
                     self.inj2VAL.setValue(int(inj2val))
+                    self.IGNITER_TC.setValue(int(ignVal))
+                    self.pressureInj.setValue(int(pinJval))
+                    self.LC_VAL.setValue(int(lcval))
+
 
                     
                     
@@ -1098,7 +1131,6 @@ class Ui_MainWindow(object):
 
                     # self.fileState.setText(self.translateFileState(str(fileWriteState)))
                 except ValueError as valueError:
-
                     pass
                 #print(json_data)
         except json.JSONDecodeError as e:
@@ -1211,9 +1243,12 @@ class Ui_MainWindow(object):
     
     
 
+        self.pinjv_label.setText(_translate("MainWindow", "P INJ VAL"))
         self.inj1Label.setText(_translate("MainWindow", "INJ 1"))
         self.inj2Label.setText(_translate("MainWindow", "INJ 2"))
-        self.igniter_label.setText(_translate("MainWindow", "IGNTR TC"))
+        self.igniter_label.setText(_translate("MainWindow", "IGN"))
+        self.lc_label.setText(_translate("MainWindow", "LC"))
+
 
 
 
