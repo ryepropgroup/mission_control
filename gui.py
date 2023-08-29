@@ -24,6 +24,7 @@ from t21 import T21
 from engine_p20_p30_gauge import engineP20_30
 from verticaltempgauge import VerticalTempLinearGauge
 from engine_tcs import Engine_TC
+from loadcell import Load_Cell
 
 from igniter_TC import Igniter_TC
 from functools import partial
@@ -147,6 +148,19 @@ class Ui_MainWindow(object):
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_date_time)
         self.timer.start(1000)  # Update every 1000 milliseconds (1 second)
+
+
+
+        self.abort_button = QtWidgets.QPushButton(self.centralwidget)
+        self.abort_button.setGeometry(QtCore.QRect(120, 600, 90, 55))
+        font = QtGui.QFont()
+        font.setFamily("Helvetica")
+        font.setPointSize(18)
+        self.abort_button.setFont(font)
+        self.abort_button.setObjectName("abort button")
+        self.abort_button.setStyleSheet("QPushButton { background-color: #272829; color: white; }" "QPushButton:pressed { background-color: #D8D9DA; }")
+        self.abort_button.setText("ABORT")
+        self.abort_button.clicked.connect(self.abort)
 
 
 
@@ -764,11 +778,11 @@ class Ui_MainWindow(object):
         self.inj2Label.setAlignment(QtCore.Qt.AlignCenter)
         self.inj2Label.setObjectName("inj 2 label")
 
-        self.LC_VAL = Engine_TC(self.centralwidget)
-        self.LC_VAL.setGeometry(QtCore.QRect(1300, 580, 60, 100)) 
+        self.LC_VAL = Load_Cell(self.centralwidget)
+        self.LC_VAL.setGeometry(QtCore.QRect(1300, 580, 100, 60)) 
         self.LC_VAL.setObjectName("LC")  
         self.lc_label = QtWidgets.QLabel(self.centralwidget)
-        self.lc_label.setGeometry(QtCore.QRect(1350, 625, 60, 16))
+        self.lc_label.setGeometry(QtCore.QRect(1315, 630, 80, 16))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
         font.setPointSize(14)
@@ -828,6 +842,11 @@ class Ui_MainWindow(object):
         
         #update date and time 
         self.time_label.setText(current_time)
+
+    
+    def abort(self): 
+        s.send(b"abort\n")
+        print("sent abort sequence")
     
     def startIO(self): 
         print("file write started")
@@ -840,8 +859,6 @@ class Ui_MainWindow(object):
     def power_off_all(self): 
         s.send(b"stop\n")
     
-    # def cavv(self): 
-    #     s.send(b"cavv\n")
 
     def op5(self): 
         s.send(b"op5\n")
@@ -1247,7 +1264,7 @@ class Ui_MainWindow(object):
         self.inj1Label.setText(_translate("MainWindow", "INJ 1"))
         self.inj2Label.setText(_translate("MainWindow", "INJ 2"))
         self.igniter_label.setText(_translate("MainWindow", "IGN"))
-        self.lc_label.setText(_translate("MainWindow", "LC"))
+        self.lc_label.setText(_translate("MainWindow", "LOAD CELL"))
 
 
 
