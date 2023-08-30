@@ -415,7 +415,7 @@ class Ui_MainWindow(object):
         self.V22_SB_NO_open.setFont(font)
         self.V22_SB_NO_open.setObjectName("V22_SB_NO_open")
         self.V22_SB_NO_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }""QPushButton:pressed { background-color: #074d05; }")
-        self.V22_SB_NO_open.clicked.connect(lambda: self.open_valve(b"V22_NO_open\n"))
+        self.V22_SB_NO_open.clicked.connect(lambda: self.open_valve(b"V22_open\n"))
         self.V22_SB_NO_close = QtWidgets.QPushButton(self.centralwidget)
         self.V22_SB_NO_close.setGeometry(QtCore.QRect(889, 71, 71, 21))
         font = QtGui.QFont()
@@ -423,7 +423,7 @@ class Ui_MainWindow(object):
         self.V22_SB_NO_close.setFont(font)
         self.V22_SB_NO_close.setObjectName("V22_SB_NO_close")
         self.V22_SB_NO_close.setStyleSheet("QPushButton { background-color: red; color: white; }" "QPushButton:pressed { background-color: #4d0505; }")
-        self.V22_SB_NO_close.clicked.connect(lambda: self.close_valve(b"V22_NO_close\n"))
+        self.V22_SB_NO_close.clicked.connect(lambda: self.close_valve(b"V22_close\n"))
 
         self.V22_SB_NO_state = QtWidgets.QLabel(self.centralwidget)
         self.V22_SB_NO_state.setGeometry(QtCore.QRect(890, 20, 71, 21))
@@ -546,7 +546,7 @@ class Ui_MainWindow(object):
         self.V33_SB_NO_open.setFont(font)
         self.V33_SB_NO_open.setObjectName("V33_SB_NO_open")
         self.V33_SB_NO_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }""QPushButton:pressed { background-color: #074d05; }")
-        self.V33_SB_NO_open.clicked.connect(lambda: self.open_valve(b"V33_NO_open\n"))
+        self.V33_SB_NO_open.clicked.connect(lambda: self.open_valve(b"V33_open\n"))
         self.V33_SB_NO_close = QtWidgets.QPushButton(self.centralwidget)
         self.V33_SB_NO_close.setGeometry(QtCore.QRect(803, 522 , 71, 21))
         font = QtGui.QFont()
@@ -554,7 +554,7 @@ class Ui_MainWindow(object):
         self.V33_SB_NO_close.setFont(font)
         self.V33_SB_NO_close.setObjectName("V30_SB_NO_close")
         self.V33_SB_NO_close.setStyleSheet("QPushButton { background-color: red; color: white; }""QPushButton:pressed { background-color: #4d0505; }")
-        self.V33_SB_NO_close.clicked.connect(lambda: self.close_valve(b"V33_NO_close\n"))
+        self.V33_SB_NO_close.clicked.connect(lambda: self.close_valve(b"V33_close\n"))
         self.V33_SB_NO_state = QtWidgets.QLabel(self.centralwidget)
         self.V33_SB_NO_state.setGeometry(QtCore.QRect(800, 550, 71, 21))
         font.setFamily("Helvetica")
@@ -905,8 +905,8 @@ class Ui_MainWindow(object):
              
                 
 
-                t2_thermo = json_data['lj']['t2val']
-                t3_thermo = json_data['lj']['t3val']
+                t2_thermo = json_data['lj']['t1val']
+                t3_thermo = json_data['lj']['t2val']
 
                 pinJval = json_data["lj"]["pinjval"] 
                 lcval   = json_data["lj"]["lcval"]
@@ -921,13 +921,13 @@ class Ui_MainWindow(object):
 
                 v20_sb = json_data['valves']['V20']
                 v21_sb = json_data['valves']['V21']
-                v22_sb = json_data['valves']['V22_NO']
+                v22_sb = json_data['valves']['V22']
                 v23_sb = json_data['valves']['V23_NO']
 
                 v30_sb = json_data['valves']['V30']
                 v31_sb = json_data['valves']['V31']
                 v32_s  = json_data['valves']['V32']
-                v33_sb = json_data['valves']['V33_NO']
+                v33_sb = json_data['valves']['V33']
                 v34_s  = json_data['valves']['V34']
                 v35_sb = json_data['valves']['V35_NO']
                 v36_s  = json_data['valves']['V36']
@@ -997,11 +997,11 @@ class Ui_MainWindow(object):
                     self.V21_MB_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
                     self.V21_MB_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
                 
-                if str(v22_sb) == "True": 
+                if str(v22_sb) == "False": 
                     self.V22_SB_NO_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
                     self.V22_SB_NO_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
 
-                elif str(v22_sb) == "False":
+                elif str(v22_sb) == "True":
                     self.V22_SB_NO_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
                     self.V22_SB_NO_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
 
@@ -1037,11 +1037,11 @@ class Ui_MainWindow(object):
                     self.V32_S_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
                     self.V32_S_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
                 
-                if str(v33_sb) == "True": 
+                if str(v33_sb) == "False": 
                     self.V33_SB_NO_open.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
                     self.V33_SB_NO_close.setStyleSheet("QPushButton { background-color: red; color: white; }")
 
-                elif str(v33_sb) == "False":
+                elif str(v33_sb) == "True":
                     self.V33_SB_NO_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }")
                     self.V33_SB_NO_close.setStyleSheet("QPushButton { background-color: #808080; color: white; }")
 
