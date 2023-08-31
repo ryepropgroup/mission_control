@@ -259,6 +259,47 @@ class Ui_MainWindow(object):
         self.operation6.clicked.connect(self.op6)
 
 
+        self.ignOPEN = QtWidgets.QPushButton(self.centralwidget)
+        self.ignOPEN.setGeometry(QtCore.QRect(40, 286, 71, 21))
+        font = QtGui.QFont()
+        font.setFamily("Helvetica")
+        self.ignOPEN.setFont(font)
+        self.ignOPEN.setObjectName("V10_SB_open")
+        self.ignOPEN.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }" "QPushButton:pressed { background-color: #074d05; }")
+        self.ignOPEN.clicked.connect(lambda: self.open_valve(b"IGN_open\n"))
+
+        self.ignCLOSE = QtWidgets.QPushButton(self.centralwidget)
+        self.ignCLOSE.setGeometry(QtCore.QRect(40, 310, 71, 21))
+        font = QtGui.QFont()
+        font.setFamily("Helvetica")
+        self.ignCLOSE.setFont(font)
+        self.ignCLOSE.setObjectName("V10_SB_close")
+        self.ignCLOSE.setStyleSheet("QPushButton { background-color: red; color: white; }" "QPushButton:pressed { background-color: #4d0505; }")
+        self.ignCLOSE.clicked.connect(lambda: self.close_valve(b"IGN_close\n"))
+        self.sign = QtWidgets.QLabel(self.centralwidget)
+        font.setFamily("Helvetica")
+        font.setPointSize(24)
+        self.sign.setFont(font)
+        self.sign.setAlignment(QtCore.Qt.AlignCenter)
+        self.sign.setObjectName("Current State")
+        self.sign.setStyleSheet("color: blue; font-size: 16px;")   
+        self.sign = QtWidgets.QLabel(self.centralwidget)
+        self.sign.setGeometry(QtCore.QRect(40, 260, 71, 21))
+        font = QtGui.QFont()
+        font.setFamily("Helvetica")
+        font.setPointSize(24)
+        self.sign.setFont(font)
+        self.sign.setAlignment(QtCore.Qt.AlignCenter)
+        self.sign.setObjectName("Current State")
+        self.sign.setStyleSheet("color: blue; font-size: 16px;")
+
+        
+
+
+
+        
+
+
      
 
 
@@ -934,6 +975,8 @@ class Ui_MainWindow(object):
                 v37_sb = json_data['valves']['V37']
                 v38_s  = json_data['valves']['V38_NO']
 
+                v_ign = json_data['valves']['IGN']
+
                 fileWriteState = json_data['writing']
 
 
@@ -1267,7 +1310,9 @@ class Ui_MainWindow(object):
         self.lc_label.setText(_translate("MainWindow", "LOAD CELL"))
 
 
-
+        self.ignOPEN.setText(_translate("MainWindow", "OPEN"))
+        self.ignCLOSE.setText(_translate("MainWindow", "CLOSE"))
+        self.sign.setText(_translate("MainWindow", "STATE"))
 
         self.V10_SB_open.setText(_translate("MainWindow", "OPEN"))
         self.V10_SB_close.setText(_translate("MainWindow", "CLOSE"))
