@@ -162,24 +162,17 @@ class Ui_MainWindow(object):
         font.setPointSize(18)
         self.abort_button.setFont(font)
         self.abort_button.setObjectName("abort button")
-        self.abort_button.setStyleSheet("QPushButton { background-color: #272829; color: white; }" "QPushButton:pressed { background-color: #D8D9DA; }")
+        self.abort_button.setStyleSheet("QPushButton { background-color: #f54e4e; color: white; }" "QPushButton:pressed { background-color: #D8D9DA; }")
         self.abort_button.setText("ABORT")
         self.abort_button.clicked.connect(self.abort)
         
-
-
-
-        #LOOK AT THIS
         self.ign_button = QtWidgets.QPushButton(self.centralwidget)
-        #CHANGE FIRST 2 CO=ORDS 
-        self.ign_button.setGeometry(QtCore.QRect(200, 150, 90, 55))
+        self.ign_button.setGeometry(QtCore.QRect(320, 700, 90, 55))
         font = QtGui.QFont()
         font.setPointSize(18)
         self.ign_button.setFont(font)
         self.ign_button.setObjectName("ignitor button")
-
-        #CHANGE COLOUR BASED ON WHATEVER YOU WANT
-        self.ign_button.setStyleSheet("QPushButton { background-color: #272829; color: white; }" "QPushButton:pressed { background-color: #D8D9DA; }")
+        self.ign_button.setStyleSheet("QPushButton { background-color: #b434eb; color: white; }" "QPushButton:pressed { background-color: #D8D9DA; }")
         self.ign_button.setText("IGNITOR")
         self.ign_button.clicked.connect(self.ign)
  
@@ -281,20 +274,16 @@ class Ui_MainWindow(object):
         self.operation5.setStyleSheet("QPushButton { background-color: #ffcc5c; color: white; }" "QPushButton:pressed { background-color: #FF8333; }")
         self.operation5.clicked.connect(self.five02)
 
-        self.operation6 = QtWidgets.QPushButton(self.centralwidget)
-        self.operation6.setGeometry(QtCore.QRect(320, 700, 90, 55))
-        font = QtGui.QFont()
-        font.setFamily("Helvetica")
-        font.setPointSize(16)
-        self.operation6.setFont(font)
-        self.operation6.setObjectName("OP 6")
-        self.operation6.setText("OP 6")
-        self.operation6.setStyleSheet("QPushButton { background-color: #7F8C8D; color: white; }" "QPushButton:pressed { background-color: #D2D2D2; }")
-        self.operation6.clicked.connect(self.op6)
-
-
-     
-
+        # self.operation6 = QtWidgets.QPushButton(self.centralwidget)
+        # self.operation6.setGeometry(QtCore.QRect(320, 700, 90, 55))
+        # font = QtGui.QFont()
+        # font.setFamily("Helvetica")
+        # font.setPointSize(16)
+        # self.operation6.setFont(font)
+        # self.operation6.setObjectName("OP 6")
+        # self.operation6.setText("OP 6")
+        # self.operation6.setStyleSheet("QPushButton { background-color: #7F8C8D; color: white; }" "QPushButton:pressed { background-color: #D2D2D2; }")
+        # self.operation6.clicked.connect(self.op6)
 
         #Valve 10 sb open, close, and state
         self.V10_SB_open = QtWidgets.QPushButton(self.centralwidget)
@@ -877,13 +866,12 @@ class Ui_MainWindow(object):
         #update date and time 
         self.time_label.setText(current_time)
 
-    #IGN METHOD SENDS IGN TO ENGINE COMPUTER
     def ign(self): 
         s.send(b"ign\n")
         print("send ign command")
     
     def abort(self): 
-        s.send(b"banana\n")
+        s.send(b"abort\n")
         print("sent abort sequence")
     
     def startIO(self): 
@@ -902,10 +890,9 @@ class Ui_MainWindow(object):
         s.send(b"op5\n")
         #sending hot fire procedure 
 
-
-    def op6(self): 
-        s.send(b"op6\n")
-        #sending op6 procedure to gremlin
+    # def op6(self): 
+    #     s.send(b"op6\n")
+    #     #sending op6 procedure to gremlin
     
     def three51(self):
         s.send(b"351\n")
@@ -1278,10 +1265,10 @@ class Ui_MainWindow(object):
         self.pwr_off.setText(_translate("MainWindow", "RESET"))
         self.start_io.setText(_translate("MainWindow", "START IO"))
         self.stop_io.setText(_translate("MainWindow", "STOP IO"))
-        self.abort_button.setText(_translate("MainWindow", "ABORT:"))
+        self.abort_button.setText(_translate("MainWindow", "ABORT"))
 
         self.operation5.setText(_translate("MainWindow","OP 5"))
-        self.operation6.setText(_translate("MainWindow","OP 6"))
+        # self.operation6.setText(_translate("MainWindow","OP 6"))
         self.four_one_oneF.setText(_translate("MainWindow", "4.1.1f"))
         self.four_one_oneO.setText(_translate("MainWindow", "4.1.1o"))
     
