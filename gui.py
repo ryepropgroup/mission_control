@@ -45,7 +45,7 @@ import orjson
 
 
 import socket
-PORT = 6970
+PORT = 6971
 
 
 
@@ -64,6 +64,10 @@ from PyQt5.QtGui import QPainter, QPen, QFont, QColor, QPolygon
 
 
 
+def rnum(val):
+    if val[0]!="0" or len(val)==1:
+        return int(val)
+    return rnum(val[1:])
 
 class WorkerThread(QThread):
 
@@ -161,8 +165,25 @@ class Ui_MainWindow(object):
         self.abort_button.setStyleSheet("QPushButton { background-color: #272829; color: white; }" "QPushButton:pressed { background-color: #D8D9DA; }")
         self.abort_button.setText("ABORT")
         self.abort_button.clicked.connect(self.abort)
+        
 
 
+
+        #LOOK AT THIS
+        self.ign_button = QtWidgets.QPushButton(self.centralwidget)
+        #CHANGE FIRST 2 CO=ORDS 
+        self.ign_button.setGeometry(QtCore.QRect(200, 150, 90, 55))
+        font = QtGui.QFont()
+        font.setPointSize(18)
+        self.ign_button.setFont(font)
+        self.ign_button.setObjectName("ignitor button")
+
+        #CHANGE COLOUR BASED ON WHATEVER YOU WANT
+        self.ign_button.setStyleSheet("QPushButton { background-color: #272829; color: white; }" "QPushButton:pressed { background-color: #D8D9DA; }")
+        self.ign_button.setText("IGNITOR")
+        self.ign_button.clicked.connect(self.ign)
+ 
+                
 
         self.start_io = QtWidgets.QPushButton(self.centralwidget)
         self.start_io.setGeometry(QtCore.QRect(300, 50, 90, 55))
@@ -217,10 +238,10 @@ class Ui_MainWindow(object):
         font.setFamily("Helvetica")
         font.setPointSize(18)
         self.four_one_oneF.setFont(font)
-        self.four_one_oneF.setObjectName("411")
+        self.four_one_oneF.setObjectName("403")
         self.four_one_oneF.setStyleSheet("QPushButton { background-color: orange; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
-        self.four_one_oneF.setText("4.1.1f")
-        self.four_one_oneF.clicked.connect(self.four11f)
+        self.four_one_oneF.setText("4.0.3")
+        self.four_one_oneF.clicked.connect(self.four03)
 
         self.four_one_oneO = QtWidgets.QPushButton(self.centralwidget)
         self.four_one_oneO.setGeometry(QtCore.QRect(120, 700, 90, 55))
@@ -228,11 +249,24 @@ class Ui_MainWindow(object):
         font.setFamily("Helvetica")
         font.setPointSize(18)
         self.four_one_oneO.setFont(font)
-        self.four_one_oneO.setObjectName("411")
+        self.four_one_oneO.setObjectName("403a")
         self.four_one_oneO.setStyleSheet("QPushButton { background-color: #7120FF; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
-        self.four_one_oneO.setText("4.1.1o")
-        self.four_one_oneO.clicked.connect(self.four11o)
+        self.four_one_oneO.setText("4.0.3a")
+        self.four_one_oneO.clicked.connect(self.four03a)
+
+        # self.four_one_oneO = QtWidgets.QPushButton(self.centralwidget)
+        # self.four_one_oneO.setGeometry(QtCore.QRect(120, 700, 90, 55))
+        # font = QtGui.QFont()
+        # font.setFamily("Helvetica")
+        # font.setPointSize(18)
+        # self.four_one_oneO.setFont(font)
+        # self.four_one_oneO.setObjectName("502")
+        # self.four_one_oneO.setStyleSheet("QPushButton { background-color: #7120FF; color: white; }" "QPushButton:pressed { background-color: #011f4b; }")
+
+        # self.four_one_oneO.setText("5.0.2")
+        # self.four_one_oneO.clicked.connect(self.five02)
        
+
         
         
 
@@ -245,7 +279,7 @@ class Ui_MainWindow(object):
         self.operation5.setObjectName("OP 5")
         self.operation5.setText("OP 5")
         self.operation5.setStyleSheet("QPushButton { background-color: #ffcc5c; color: white; }" "QPushButton:pressed { background-color: #FF8333; }")
-        self.operation5.clicked.connect(self.op5)
+        self.operation5.clicked.connect(self.five02)
 
         self.operation6 = QtWidgets.QPushButton(self.centralwidget)
         self.operation6.setGeometry(QtCore.QRect(320, 700, 90, 55))
@@ -415,7 +449,7 @@ class Ui_MainWindow(object):
         self.V22_SB_NO_open.setFont(font)
         self.V22_SB_NO_open.setObjectName("V22_SB_NO_open")
         self.V22_SB_NO_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }""QPushButton:pressed { background-color: #074d05; }")
-        self.V22_SB_NO_open.clicked.connect(lambda: self.open_valve(b"V22_NO_open\n"))
+        self.V22_SB_NO_open.clicked.connect(lambda: self.open_valve(b"V22_open\n"))
         self.V22_SB_NO_close = QtWidgets.QPushButton(self.centralwidget)
         self.V22_SB_NO_close.setGeometry(QtCore.QRect(889, 71, 71, 21))
         font = QtGui.QFont()
@@ -423,7 +457,7 @@ class Ui_MainWindow(object):
         self.V22_SB_NO_close.setFont(font)
         self.V22_SB_NO_close.setObjectName("V22_SB_NO_close")
         self.V22_SB_NO_close.setStyleSheet("QPushButton { background-color: red; color: white; }" "QPushButton:pressed { background-color: #4d0505; }")
-        self.V22_SB_NO_close.clicked.connect(lambda: self.close_valve(b"V22_NO_close\n"))
+        self.V22_SB_NO_close.clicked.connect(lambda: self.close_valve(b"V22_close\n"))
 
         self.V22_SB_NO_state = QtWidgets.QLabel(self.centralwidget)
         self.V22_SB_NO_state.setGeometry(QtCore.QRect(890, 20, 71, 21))
@@ -546,7 +580,7 @@ class Ui_MainWindow(object):
         self.V33_SB_NO_open.setFont(font)
         self.V33_SB_NO_open.setObjectName("V33_SB_NO_open")
         self.V33_SB_NO_open.setStyleSheet("QPushButton { background-color: #12b81b; color: white; }""QPushButton:pressed { background-color: #074d05; }")
-        self.V33_SB_NO_open.clicked.connect(lambda: self.open_valve(b"V33_NO_open\n"))
+        self.V33_SB_NO_open.clicked.connect(lambda: self.open_valve(b"V33_open\n"))
         self.V33_SB_NO_close = QtWidgets.QPushButton(self.centralwidget)
         self.V33_SB_NO_close.setGeometry(QtCore.QRect(803, 522 , 71, 21))
         font = QtGui.QFont()
@@ -554,7 +588,7 @@ class Ui_MainWindow(object):
         self.V33_SB_NO_close.setFont(font)
         self.V33_SB_NO_close.setObjectName("V30_SB_NO_close")
         self.V33_SB_NO_close.setStyleSheet("QPushButton { background-color: red; color: white; }""QPushButton:pressed { background-color: #4d0505; }")
-        self.V33_SB_NO_close.clicked.connect(lambda: self.close_valve(b"V33_NO_close\n"))
+        self.V33_SB_NO_close.clicked.connect(lambda: self.close_valve(b"V33_close\n"))
         self.V33_SB_NO_state = QtWidgets.QLabel(self.centralwidget)
         self.V33_SB_NO_state.setGeometry(QtCore.QRect(800, 550, 71, 21))
         font.setFamily("Helvetica")
@@ -843,9 +877,13 @@ class Ui_MainWindow(object):
         #update date and time 
         self.time_label.setText(current_time)
 
+    #IGN METHOD SENDS IGN TO ENGINE COMPUTER
+    def ign(self): 
+        s.send(b"ign\n")
+        print("send ign command")
     
     def abort(self): 
-        s.send(b"abort\n")
+        s.send(b"banana\n")
         print("sent abort sequence")
     
     def startIO(self): 
@@ -872,14 +910,17 @@ class Ui_MainWindow(object):
     def three51(self):
         s.send(b"351\n")
 
-    def four11f(self): 
-        s.send(b"411f\n")
-        print("Seq 411f command sent")
-       
+    def four03(self): 
+        s.send(b"403\n")
+        print("Seq 403 command sent")
 
-    def four11o(self): 
-       s.send(b"f11o\n")
-       print("Seq 411o command sent")
+    def four03a(self): 
+        s.send(b"403a\n")
+        print("Seq 403a command sent")
+         
+    def five02(self): 
+       s.send(b"502\n")
+       print("Seq 502 command sent")
 
      
 
@@ -905,8 +946,8 @@ class Ui_MainWindow(object):
              
                 
 
-                t2_thermo = json_data['lj']['t2val']
-                t3_thermo = json_data['lj']['t3val']
+                t2_thermo = json_data['lj']['t1val']
+                t3_thermo = json_data['lj']['t2val']
 
                 pinJval = json_data["lj"]["pinjval"] 
                 lcval   = json_data["lj"]["lcval"]
@@ -921,13 +962,13 @@ class Ui_MainWindow(object):
 
                 v20_sb = json_data['valves']['V20']
                 v21_sb = json_data['valves']['V21']
-                v22_sb = json_data['valves']['V22_NO']
+                v22_sb = json_data['valves']['V22']
                 v23_sb = json_data['valves']['V23_NO']
 
                 v30_sb = json_data['valves']['V30']
                 v31_sb = json_data['valves']['V31']
                 v32_s  = json_data['valves']['V32']
-                v33_sb = json_data['valves']['V33_NO']
+                v33_sb = json_data['valves']['V33']
                 v34_s  = json_data['valves']['V34']
                 v35_sb = json_data['valves']['V35_NO']
                 v36_s  = json_data['valves']['V36']
@@ -1091,60 +1132,46 @@ class Ui_MainWindow(object):
 
 
 
-
-
-
-
-
-
-
-
-
-
                 try:
-                    self.P31.setValue(int(p3_val))
-                    self.P21.setValue(int(p2_val))
+                    self.P31.setValue(rnum(p3_val))
+                    self.P21.setValue(rnum(p2_val))
 
-                    self.P10.setValue(int(p1_val))
-                    self.P20.setValue(int(p20_val))
-                    self.P30.setValue(int(p30_val))
+                    self.P10.setValue(rnum(p1_val))
+                    self.P20.setValue(rnum(p20_val))
+                    self.P30.setValue(rnum(p30_val))
                     
-                    self.P22.setValue(int(p22_val))
-                    self.P32.setValue(int(p32_val))
+                    self.P22.setValue(rnum(p22_val))
+                    self.P32.setValue(rnum(p32_val))
 
-                    self.inj1VAL.setValue(int(inj1val))
-                    self.inj2VAL.setValue(int(inj2val))
-                    self.IGNITER_TC.setValue(int(ignVal))
-                    self.pressureInj.setValue(int(pinJval))
-                    self.LC_VAL.setValue(int(lcval))
-
-
-                    
-                    
-                    self.T2_ETH_RUN.setValue(int(t2_thermo))
-                    self.T3_N2O_run.setValue(int(t3_thermo))
-                    self.IGNITER_TC.setValue(int(ignVal))
+                    self.inj1VAL.setValue(rnum(inj1val))
+                    self.inj2VAL.setValue(rnum(inj2val))
+                    # self.IGNITER_TC.setValue(rnum(ignVal))
+                    self.pressureInj.setValue(rnum(pinJval))
+                    self.LC_VAL.setValue(rnum(lcval))
+                    self.T2_ETH_RUN.setValue(rnum(t2_thermo))
+                    self.T3_N2O_run.setValue(rnum(t3_thermo))
+                    self.IGNITER_TC.setValue(rnum(ignVal))
 
 
-                    self.V10_SB_state.setText(self.translateState(str(v10_sb)))
-                    self.V11_S_NO_state.setText(self.translateState(str(v11_s)))
-                    self.V12_S_state.setText(self.translateState(str(v12_s)))
-                    
-
-                    self.V20_SB_state.setText(self.translateState(str(v20_sb)))
-                    self.V21_MB_state.setText(self.translateState(str(v21_sb)))
-                    self.V22_SB_NO_state.setText(self.translateState(str(v22_sb)))
-                    self.V23_SB_state.setText(self.translateState(str(v23_sb)))
-
-                    self.V30_SB_state.setText(self.translateState(str(v30_sb)))
-                    self.V31_MB_state.setText(self.translateState(str(v31_sb)))
-                    self.V32_S_state.setText(self.translateState(str(v32_s)))
-                    self.V33_SB_NO_state.setText(self.translateState(str(v33_sb)))
-                    self.V34_S_state.setText(self.translateState(str(v34_s)))
-                    self.V35_SB_NO_state.setText(self.translateState(str(v35_sb)))
-                    self.V36_S_state.setText(self.translateState(str(v36_s)))
-                    self.V37_SB_state.setText(self.translateState(str(v37_sb)))
-                    self.V38_S_state.setText(self.translateState(str(v38_s)))
+                    # self.V10_SB_state.setText(self.translateState(str(v10_sb)))
+                    # self.V11_S_NO_state.setText(self.translateState(str(v11_s)))
+                    # self.V12_S_state.setText(self.translateState(str(v12_s)))
+                    # 
+                    #
+                    # self.V20_SB_state.setText(self.translateState(str(v20_sb)))
+                    # self.V21_MB_state.setText(self.translateState(str(v21_sb)))
+                    # self.V22_SB_NO_state.setText(self.translateState(str(v22_sb)))
+                    # self.V23_SB_state.setText(self.translateState(str(v23_sb)))
+                    #
+                    # self.V30_SB_state.setText(self.translateState(str(v30_sb)))
+                    # self.V31_MB_state.setText(self.translateState(str(v31_sb)))
+                    # self.V32_S_state.setText(self.translateState(str(v32_s)))
+                    # self.V33_SB_NO_state.setText(self.translateState(str(v33_sb)))
+                    # self.V34_S_state.setText(self.translateState(str(v34_s)))
+                    # self.V35_SB_NO_state.setText(self.translateState(str(v35_sb)))
+                    # self.V36_S_state.setText(self.translateState(str(v36_s)))
+                    # self.V37_SB_state.setText(self.translateState(str(v37_sb)))
+                    # self.V38_S_state.setText(self.translateState(str(v38_s)))
 
                     # self.fileState.setText(self.translateFileState(str(fileWriteState)))
                 except ValueError as valueError:
@@ -1251,7 +1278,7 @@ class Ui_MainWindow(object):
         self.pwr_off.setText(_translate("MainWindow", "RESET"))
         self.start_io.setText(_translate("MainWindow", "START IO"))
         self.stop_io.setText(_translate("MainWindow", "STOP IO"))
-
+        self.abort_button.setText(_translate("MainWindow", "ABORT:"))
 
         self.operation5.setText(_translate("MainWindow","OP 5"))
         self.operation6.setText(_translate("MainWindow","OP 6"))
